@@ -8,14 +8,14 @@ function Home() {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
         viewport={{ once: true }}
         className='flex justify-center items-center text-green-500 font-bold'
       >
-        <p>
+        <p className='text-xl'>
           {' '}
-          Hello there , I'm Fizan Muhammed Faisal and This Portfolio is Under
-          construction
+          Hello there , I &apos; m Fizan Muhammed Faisal and This Portfolio is
+          Under construction
         </p>
       </motion.div>
     </div>
