@@ -110,7 +110,9 @@ function Header() {
                       {isHovered && (
                         <motion.div
                           layoutId="hovered"
-                          className="absolute inset-0 bg-white/10 rounded-lg"
+                          className={clsx(
+                            'absolute inset-0 bg-white/10 rounded-md'
+                          )}
                           initial={false}
                           transition={{
                             type: 'spring',
@@ -135,7 +137,7 @@ function Header() {
           })}
         </motion.ul>
 
-        <div className="absolute left-0 right-0 top-0 bottom-0 border-4 border-white/10 backdrop-blur-md shadow-xl rounded-md pointer-events-none"></div>
+        <div className="absolute left-0 right-0 top-0 bottom-0 border-2 border-white/10 backdrop-blur-md shadow-xl rounded-md pointer-events-none"></div>
       </div>
     </motion.div>
   )

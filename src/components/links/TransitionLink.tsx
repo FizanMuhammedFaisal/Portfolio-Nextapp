@@ -3,11 +3,8 @@
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { ReactNode } from 'react'
-import {
-  useAnimation,
-  AnimationControls,
-  TargetAndTransition,
-} from 'motion/react'
+import { TargetAndTransition } from 'motion/react'
+import { useTransition } from '@/context/TransitionContext'
 
 interface TransitionLinkProps extends LinkProps {
   children: ReactNode
@@ -28,19 +25,17 @@ function TransitionLink({
   ...props
 }: TransitionLinkProps) {
   const router = useRouter()
-  const controls: AnimationControls = useAnimation()
+  const { setExiting, exitDuration } = useTransition()
 
   const handleTransition = async (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault()
+    setExiting(true)
 
-    const pageElement = document.getElementById('page')
-
-    if (pageElement) {
-      await controls.start(exitAnimation)
-    }
-    await new Promise((resolve) => setTimeout(resolve, animationDuration))
+    setTimeout(() => {
+      setExiting(false)
+    }, exitDuration)
     router.push(href)
   }
 
