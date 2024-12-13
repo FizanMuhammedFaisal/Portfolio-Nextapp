@@ -1,24 +1,38 @@
 'use client'
-import { motion } from 'motion/react'
+
+import Transition from '@/components/layout/Transition'
+import { motion } from 'framer-motion'
 import React from 'react'
 
 function Home() {
   return (
-    <div className='min-h-screen flex justify-center bg-black'>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeInOut' }}
-        viewport={{ once: true }}
-        className='flex justify-center items-center text-green-500 font-bold'
-      >
-        <p className='text-xl'>
-          {' '}
-          Hello there , I &apos; m Fizan Muhammed Faisal and This Portfolio is
-          Under construction
-        </p>
-      </motion.div>
-    </div>
+    <Transition>
+      <div className="min-h-screen flex flex-col justify-center items-center bg-black text-green-500 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="z-10 text-center"
+        >
+          <motion.h1
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="text-5xl font-bold mb-4"
+          >
+            Fizan Muhammed Faisal
+          </motion.h1>
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            className="text-xl mb-8"
+          >
+            Full-Stack Developer | Problem Solver
+          </motion.p>
+        </motion.div>
+      </div>
+    </Transition>
   )
 }
 
