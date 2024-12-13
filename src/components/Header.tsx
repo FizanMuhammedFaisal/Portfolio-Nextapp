@@ -1,6 +1,5 @@
 'use client'
 
-import '@/styles/header.css'
 import clsx from 'clsx'
 import {
   AnimatePresence,
@@ -8,7 +7,6 @@ import {
   useMotionValueEvent,
   useScroll,
 } from 'framer-motion'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useRef, useState } from 'react'
 import TransitionLink from './links/TransitionLink'
@@ -103,8 +101,9 @@ function Header() {
                           animate={{ opacity: 1 }}
                           transition={{
                             type: 'spring',
-                            stiffness: 400,
-                            damping: 30,
+                            stiffness: 310,
+                            damping: 37,
+                            mass: 1,
                           }}
                         />
                       )}

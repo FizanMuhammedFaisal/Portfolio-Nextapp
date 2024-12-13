@@ -18,7 +18,7 @@ function Home() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-5xl font-bold mb-4"
+            className="text-4xl font-bold bg-gradient-to-br from-white via-slate-400 to-white bg-clip-text text-transparent"
           >
             Fizan Muhammed Faisal
           </motion.h1>

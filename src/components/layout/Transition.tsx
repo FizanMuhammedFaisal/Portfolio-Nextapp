@@ -1,7 +1,6 @@
 'use client'
 import { motion, Variants } from 'motion/react'
 import React from 'react'
-import Header from '../Header'
 import './transition.scss'
 function Transition({ children }: { children: React.ReactNode }) {
   const anim = (variants: Variants) => {
@@ -18,17 +17,17 @@ function Transition({ children }: { children: React.ReactNode }) {
     exit: { opacity: 1 },
   }
 
-  const slide: Variants = {
-    initial: { top: '100vh' },
-    enter: { top: '100vh' },
-    exit: { top: '0', transition: { duration: 1 } },
-  }
+  // const slide: Variants = {
+  //   initial: { top: '100vh' },
+  //   enter: { top: '100vh' },
+  //   exit: { top: '0', transition: { duration: 1 } },
+  // }
 
-  const perspective: Variants = {
-    initial: { y: 0, scale: 1, opacity: 1 },
-    enter: { y: 0, scale: 1, opacity: 1 },
-    exit: { y: -100, scale: 0.9, opacity: 0.5, transition: { duration: 1 } },
-  }
+  // const perspective: Variants = {
+  //   initial: { y: 0, scale: 1, opacity: 1 },
+  //   enter: { y: 0, scale: 1, opacity: 1 },
+  //   exit: { y: -100, scale: 0.9, opacity: 0.5, transition: { duration: 1 } },
+  // }
 
   return (
     <div className="">
