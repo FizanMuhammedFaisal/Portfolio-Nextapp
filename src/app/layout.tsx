@@ -31,10 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TransitionProvider>
-          <>
-            <Header />
-            {children}
-          </>
+          <>{children}</>
         </TransitionProvider>
       </body>
     </html>

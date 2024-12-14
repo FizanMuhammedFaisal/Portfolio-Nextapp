@@ -2,13 +2,20 @@
 import { motion, AnimatePresence, Variants } from 'motion/react'
 import React, { useEffect } from 'react'
 import { useTransition } from '@/context/TransitionContext'
+import Header from '../Header'
 interface TransitionProps {
   children: React.ReactNode
   variants?: Variants
   exitDuration?: number
+  includeHeader?: boolean
 }
 
-function Transition({ children, variants, exitDuration }: TransitionProps) {
+function Transition({
+  children,
+  variants,
+  exitDuration,
+  includeHeader,
+}: TransitionProps) {
   const { isExiting, setExitDuration } = useTransition()
   // Default animation variants (opacity effect)
   const defaultVariants: Variants = {
@@ -18,20 +25,9 @@ function Transition({ children, variants, exitDuration }: TransitionProps) {
   }
   exitDuration ? setExitDuration(exitDuration) : ''
   const animVariants = variants || defaultVariants
-
-  const anim = {
-    initial: 'initial',
-    animate: 'enter',
-    exit: 'exit',
-    variants: animVariants,
-  }
-
-  useEffect(() => {
-    console.log('isExiting', isExiting)
-  }, [isExiting])
-
   return (
     <div className="transition-container">
+      {!includeHeader ? <Header /> : ''}
       <AnimatePresence mode="wait">
         {!isExiting && (
           <motion.div
@@ -41,6 +37,7 @@ function Transition({ children, variants, exitDuration }: TransitionProps) {
             exit="exit"
             variants={animVariants}
           >
+            {includeHeader ? <Header /> : ''}
             {children}
           </motion.div>
         )}
