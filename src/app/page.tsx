@@ -1,84 +1,34 @@
 'use client'
 
 import Transition from '@/components/layout/Transition'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import React from 'react'
+import { Github, Linkedin, Mail, Code, Cpu, Database } from 'lucide-react'
 
 function Home() {
-  // Fancy animation for individual text letters
-  const letterAnimation: Variants = {
-    initial: { y: 100, opacity: 0, rotate: -45 },
-    animate: (index: number) => ({
-      y: 0,
-      opacity: 1,
-      rotate: 0,
-      transition: { delay: index * 0.1, duration: 0.8, ease: 'easeOut' },
-    }),
-  }
-
-  const pageAnimation: Variants = {
-    initial: { opacity: 1, scale: 0.8 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 1 } },
-    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
-  }
-
-  // Background shapes animation
-  const shapeAnimation: Variants = {
-    initial: { opacity: 0, scale: 0 },
-    animate: (index: number) => ({
-      opacity: 0.2,
-      scale: 2,
-      transition: { delay: index * 0.5, duration: 3, ease: 'easeInOut' },
-    }),
-  }
-
-  // Text content
-  const title = 'Fizan Muhammed Faisal'
-  const description = 'Full-Stack Developer | Problem Solver'
-
   return (
-    <Transition variants={pageAnimation}>
-      <div className="relative min-h-screen flex flex-col justify-center items-center bg-black text-green-500 overflow-hidden">
-        {/* Background Shapes */}
-        {[...Array(3)].map((_, index) => (
-          <motion.div
-            key={index}
-            variants={shapeAnimation}
-            custom={index}
-            initial="initial"
-            animate="animate"
-            className="absolute w-96 h-96 bg-gradient-to-br from-green-400 to-purple-500 rounded-full blur-3xl"
-          />
-        ))}
-
-        {/* Title Animation */}
+    <Transition>
+      <div className="min-h-screen flex  justify-start items-center p-4 bg-gradient-to-br from-black via-black to-green-900 text-white">
         <motion.div
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="z-10 text-center"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className=" mb-12 flex gap-2"
         >
-          <h1 className="text-4xl font-bold flex space-x-2">
-            {title.split('').map((letter, index) => (
-              <motion.span
-                key={index}
-                custom={index}
-                variants={letterAnimation}
-                className="inline-block bg-gradient-to-br from-white via-slate-400 to-white bg-clip-text text-transparent"
-              >
-                {letter}
-              </motion.span>
-            ))}
+          <h1 className="text-5xl font-medium mb-4 bg-gradient-to-b from-white via-slate-400 to-slate-100 text-transparent bg-clip-text">
+            I'M
           </h1>
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 1 }}
-            className="text-xl mt-4"
-          >
-            {description}
-          </motion.p>
+          <h1 className="text-5xl font-medium mb-4 bg-gradient-to-br from-white via-slate-400 to-slate-100 text-transparent bg-clip-text">
+            Fizan Muhammed Faisal
+          </h1>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 1.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        ></motion.div>
       </div>
     </Transition>
   )

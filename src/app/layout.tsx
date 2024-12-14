@@ -1,18 +1,14 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
-import Header from '@/components/Header'
+import { Raleway, Montserrat } from 'next/font/google'
 import { TransitionProvider } from '@/context/TransitionContext'
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 })
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'], // Add weights as per your requirements
 })
 
 export const metadata: Metadata = {
@@ -28,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${raleway.className} ${montserrat.className} antialiased`}
       >
         <TransitionProvider>
           <>{children}</>

@@ -17,5 +17,9 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Raleway, sans-serif;
+}
+
+:root {
+  --font-montserrat: 'Montserrat', sans-serif;
 }

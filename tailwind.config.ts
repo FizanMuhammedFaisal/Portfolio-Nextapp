@@ -14,6 +14,10 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        raleway: ['var(--font-raleway)', 'sans-serif'],
+      },
     },
   },
   plugins: [forms, typography, aspectRatio],

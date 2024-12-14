@@ -12,7 +12,7 @@ import React, { useRef, useState } from 'react'
 import TransitionLink from './links/TransitionLink'
 const TOP_SCROLL_LIMIT =
   typeof window !== 'undefined' ? window.innerHeight * 0.9 : 200
-const SCROLL_THRESHOLD_SPEED = 2.5
+const SCROLL_THRESHOLD_SPEED = 2.8
 
 type NavLink = {
   href: string
@@ -62,10 +62,10 @@ function Header() {
       initial={{ y: 0 }}
       animate={{ y: visibility ? 0 : -100 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="flex justify-center top-0 sticky z-50 pointer-events-none rounded-md overflow-hidden"
+      className="flex justify-center top-0 fixed left-0 right-0 z-50 pointer-events-none rounded-md overflow-hidden"
     >
       <div className="flex justify-center max-w-96 min-w-11 mt-2 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
-        <div className="absolute inset-0 backdrop-blur-[19px] bg-white/5 rounded-md pointer-events-none"></div>
+        <div className="absolute inset-0 backdrop-blur-[19px] bg-white/10 rounded-md pointer-events-none"></div>
 
         <motion.ul className="flex px-4 py-2 relative z-10">
           {links.map((link, i) => {
@@ -93,24 +93,11 @@ function Header() {
                         bottom: 0,
                       }}
                     >
-                      {isSelected && (
-                        <motion.div
-                          className="absolute inset-0 bg-white/40 rounded-md"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 310,
-                            damping: 37,
-                            mass: 1,
-                          }}
-                        />
-                      )}
                       {isHovered && (
                         <motion.div
                           layoutId="hovered"
                           className={clsx(
-                            'absolute inset-0 bg-white/10 rounded-md'
+                            'absolute inset-0 bg-black/30 rounded-md'
                           )}
                           initial={false}
                           transition={{
@@ -123,7 +110,7 @@ function Header() {
                     </motion.div>
 
                     <span
-                      className={`relative z-10 ${
+                      className={`relative z-10  ${
                         isSelected ? 'text-green-500' : 'text-white'
                       }`}
                     >
@@ -136,7 +123,7 @@ function Header() {
           })}
         </motion.ul>
 
-        <div className="absolute left-0 right-0 top-0 bottom-0 border-2 border-white/10 backdrop-blur-md shadow-xl rounded-md pointer-events-none"></div>
+        <div className="absolute left-0 right-0 top-0 bottom-0 border-2 border-white/5 backdrop-blur-md shadow-xl rounded-md pointer-events-none"></div>
       </div>
     </motion.div>
   )
