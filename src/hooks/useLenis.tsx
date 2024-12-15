@@ -6,12 +6,11 @@ import Lenis from '@studio-freight/lenis'
 const useLenis = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing curve
+      duration: 1.9,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
 
     const raf = (time: number) => {
-      // Specify type here
       lenis.raf(time)
       requestAnimationFrame(raf)
     }

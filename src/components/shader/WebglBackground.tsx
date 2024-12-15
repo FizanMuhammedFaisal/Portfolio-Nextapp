@@ -1,15 +1,43 @@
 'use client'
 
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback, useState } from 'react'
 
 interface WebGLBackgroundProps {
   mousePosition: { x: number; y: number }
+}
+type MousePosition = {
+  x: number
+  y: number
 }
 
 const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+  //smoothing
+  const [smoothMousePosition, setSmoothMousePosition] = useState<MousePosition>(
+    { x: 0, y: 0 }
+  )
+  const animationFrameId = useRef<number | null>(null)
 
+  // Smooth out the mouse position
+  useEffect(() => {
+    const smoothMouseMovement = () => {
+      setSmoothMousePosition((prev) => ({
+        x: prev.x + (mousePosition.x - prev.x) * 0.03,
+        y: prev.y + (mousePosition.y - prev.y) * 0.03,
+      }))
+      animationFrameId.current = requestAnimationFrame(smoothMouseMovement)
+    }
+
+    animationFrameId.current = requestAnimationFrame(smoothMouseMovement)
+
+    // Cleanup function to cancel animation frame when component unmounts
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
+    }
+  }, [mousePosition])
   // Refs to store WebGL resources to prevent them from being garbage collected
   const glRef = useRef<WebGLRenderingContext | null>(null)
   const programRef = useRef<WebGLProgram | null>(null)
@@ -100,13 +128,13 @@ vec2 particleMotion(vec2 st, vec2 mouse, float time) {
   float distanceToMouse = length(st - mouse);
   
   // Create a ripple effect
-  float ripple = sin(distanceToMouse * 20.0 - time * 10.0);
+  float ripple = sin(distanceToMouse * 20.0 - time * 5.0);
   
   // Directional pull towards mouse
   vec2 mouseDirection = normalize(mouse - st);
   
   // Modify particle movement based on mouse proximity
-  float mouseInfluence = smoothstep(0.1, 0.9, distanceToMouse);
+  float mouseInfluence = smoothstep(0.1, 0.9, distanceToMouse) *0.1;
   
   // Add some noise-based randomness
   vec2 noiseOffset = vec2(
@@ -125,12 +153,12 @@ void main() {
   st = particleMotion(st, mouse, u_time);
 
   // Generate base pattern with particle movement
-  float f = noise(st * 11.0 + u_time * 0.1);
+  float f = noise(st * 22.0 + u_time * 0.1);
   f = noise(st + f);
 
   // Create color variation
-  vec3 color1 = vec3(0.0, 0.05, 0.0);
-  vec3 color2 = vec3(0.0, 0.8, 0.1);
+  vec3 color1 = vec3(0.0, 0.02, 0.05);
+  vec3 color2 = vec3(0.0, 0.4, 0.1);
   vec3 color = mix(color1, color2, f);
 
   // Add some dynamic highlighting
@@ -202,7 +230,7 @@ void main() {
     const render = (time: number) => {
       if (!glRef.current || !programRef.current) return
 
-      time *= 0.00005 // Reduced speed to lower computational load
+      time *= 0.00008 // Reduced speed to lower computational load
 
       gl.clearColor(0, 0, 0, 1)
       gl.clear(gl.COLOR_BUFFER_BIT)
@@ -212,8 +240,8 @@ void main() {
       gl.uniform1f(timeLocation, time)
       gl.uniform2f(
         mouseLocation,
-        mousePosition.x,
-        canvas.height - mousePosition.y
+        smoothMousePosition.x,
+        canvas.height - smoothMousePosition.y
       )
 
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
@@ -230,15 +258,14 @@ void main() {
       // Remove resize listener
       window.removeEventListener('resize', resizeCanvas)
 
-      // Perform cleanup of WebGL resources
       cleanup()
     }
-  }, [mousePosition, cleanup])
+  }, [smoothMousePosition, cleanup])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full blur-md z-[-1]"
+      className="fixed top-0 left-0 w-full h-full  z-[-1]"
     />
   )
 }

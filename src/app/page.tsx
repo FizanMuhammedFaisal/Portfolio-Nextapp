@@ -17,29 +17,11 @@ function Home() {
     <Transition>
       <div className="relative" onMouseMove={handleMouseMove}>
         <WebGLBackground mousePosition={mousePosition} />
-        <div className="flex min-h-screen justify-start items-center p-4 text-white">
+        <div className="flex min-h-screen justify-center items-center p-4 text-white">
           <motion.div className="mb-12 flex gap-2">
-            <motion.h1
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: 'spring',
-                stiffness: 120,
-                damping: 10,
-              }}
-              className="text-5xl font-medium mb-4 bg-gradient-to-b from-white via-slate-400 to-slate-100 text-transparent bg-clip-text"
-            >
-              I'M
-            </motion.h1>
             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: 'spring',
-                stiffness: 120,
-                damping: 10,
-                delay: 1.1,
-              }}
               className="text-5xl font-medium mb-4 bg-gradient-to-br from-white via-slate-400 to-slate-100 text-transparent bg-clip-text"
             >
               Fizan Muhammed Faisal
@@ -47,6 +29,7 @@ function Home() {
           </motion.div>
         </div>
       </div>
+      <div className="bg-gradient-to-b from-transparent to-black  h-20"></div>
       <div className="h-screen bg-black"></div>
     </Transition>
   )

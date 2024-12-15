@@ -7,7 +7,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from 'framer-motion'
-import * as TransitionLink from 'next/link'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useRef, useState } from 'react'
 // import TransitionLink from './links/TransitionLink'
@@ -77,7 +77,7 @@ function Header() {
             return (
               <motion.li key={i} className="relative">
                 <AnimatePresence>
-                  <TransitionLink
+                  <Link
                     href={link.href}
                     className={clsx(
                       'block relative py-1 px-3 rounded-md hover:text-white/75'
@@ -118,7 +118,7 @@ function Header() {
                     >
                       {link.label}
                     </span>
-                  </TransitionLink>
+                  </Link>
                 </AnimatePresence>
               </motion.li>
             )
