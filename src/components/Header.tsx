@@ -7,9 +7,11 @@ import {
   useMotionValueEvent,
   useScroll,
 } from 'framer-motion'
+import * as TransitionLink from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useRef, useState } from 'react'
-import TransitionLink from './links/TransitionLink'
+// import TransitionLink from './links/TransitionLink'
+
 const TOP_SCROLL_LIMIT =
   typeof window !== 'undefined' ? window.innerHeight * 0.9 : 200
 const SCROLL_THRESHOLD_SPEED = 2.8

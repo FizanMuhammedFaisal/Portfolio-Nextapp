@@ -1,19 +1,30 @@
-import Transition from '@/components/layout/Transition'
+'use client'
 
-import React from 'react'
-function page() {
+import React, { useState } from 'react'
+import Transition from '@/components/layout/Transition'
+import WebGLBackground from '@/components/shader/WebglBackground'
+import useLenis from '@/hooks/useLenis'
+
+function Page() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY })
+  }
+
+  useLenis()
+
   return (
     <Transition>
-      <div className="bg-slate-700">
-        {[...Array(400)].map((_, i) => (
-          <p key={i} className="text-lg text-black/50">
-            This is paragraph {i + 1}. Scroll quickly up and down to see the
-            header animation effect.
-          </p>
-        ))}
+      <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
+        <WebGLBackground mousePosition={mousePosition} />
+        <div className="relative z-10 p-4">
+          <h1 className="text-white text-2xl">Your content here</h1>
+          fasdfasd
+        </div>
       </div>
     </Transition>
   )
 }
 
-export default page
+export default Page
