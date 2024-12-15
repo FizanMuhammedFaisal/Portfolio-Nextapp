@@ -20,7 +20,7 @@ function Page() {
         <WebGLBackground mousePosition={mousePosition} />
         <div className="relative z-10 p-4">
           <h1 className="text-white text-2xl">Your content here</h1>
-          fasdfasd
+          asdf
         </div>
       </div>
     </Transition>

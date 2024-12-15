@@ -107,7 +107,7 @@ uniform vec2 u_mouse;
 
 // Random function
 float random(vec2 st) {
-  return fract(sin(dot(st.xy, vec2(82.9898, 78.233))) * 43758.5453123);
+  return fract(sin(dot(st.xy, vec2(82.9898, 78.233))) * 3758.5453123);
 }
 
 // Noise function
@@ -153,9 +153,12 @@ void main() {
   st = particleMotion(st, mouse, u_time);
 
   // Generate base pattern with particle movement
-  float f = noise(st * 22.0 + u_time * 0.1);
+  float f = noise(st * 8.0 + u_time * 0.1);
   f = noise(st + f);
-
+f = abs(f - 0.1) * 2.0;      
+      
+float finerNoise = noise(st * 16.0 + u_time * 0.2); 
+f += finerNoise * 0.1; // Blend with base noise
   // Create color variation
   vec3 color1 = vec3(0.0, 0.02, 0.05);
   vec3 color2 = vec3(0.0, 0.4, 0.1);
@@ -230,7 +233,7 @@ void main() {
     const render = (time: number) => {
       if (!glRef.current || !programRef.current) return
 
-      time *= 0.00008 // Reduced speed to lower computational load
+      time *= 0.0005 // Reduced speed to lower computational load
 
       gl.clearColor(0, 0, 0, 1)
       gl.clear(gl.COLOR_BUFFER_BIT)
