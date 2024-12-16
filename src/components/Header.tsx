@@ -67,7 +67,7 @@ function Header() {
       className="flex justify-center top-0 fixed left-0 right-0 z-50 pointer-events-none rounded-md overflow-hidden"
     >
       <div className="flex justify-center max-w-96 min-w-11 mt-2 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
-        <div className="absolute inset-0 backdrop-blur-[19px] bg-white/10 rounded-md pointer-events-none"></div>
+        <div className="absolute inset-0 z-50 backdrop-blur-[19px] bg-white/10 rounded-md pointer-events-none"></div>
 
         <motion.ul className="flex px-4 py-2 relative z-10">
           {links.map((link, i) => {

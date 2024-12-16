@@ -16,13 +16,14 @@ function Page() {
 
   return (
     <Transition>
-      <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
-        <WebGLBackground mousePosition={mousePosition} />
-        <div className="relative z-10 p-4">
-          <h1 className="text-white text-2xl">Your content here</h1>
-          asdf
+      <WebGLBackground mousePosition={mousePosition}>
+        <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
+          <div className="relative z-10 p-4">
+            <h1 className="text-white text-2xl">Your content here</h1>
+            asdf
+          </div>
         </div>
-      </div>
+      </WebGLBackground>
     </Transition>
   )
 }

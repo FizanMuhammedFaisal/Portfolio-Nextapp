@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react'
 
 interface WebGLBackgroundProps {
+  children?: React.ReactNode
   mousePosition: { x: number; y: number }
 }
 type MousePosition = {
@@ -10,21 +11,23 @@ type MousePosition = {
   y: number
 }
 
-const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
+const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
+  mousePosition,
+  children,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-  //smoothing
+
   const [smoothMousePosition, setSmoothMousePosition] = useState<MousePosition>(
     { x: 0, y: 0 }
   )
   const animationFrameId = useRef<number | null>(null)
 
-  // Smooth out the mouse position
   useEffect(() => {
     const smoothMouseMovement = () => {
       setSmoothMousePosition((prev) => ({
-        x: prev.x + (mousePosition.x - prev.x) * 0.03,
-        y: prev.y + (mousePosition.y - prev.y) * 0.03,
+        x: prev.x + (mousePosition.x - prev.x) * 0.025,
+        y: prev.y + (mousePosition.y - prev.y) * 0.025,
       }))
       animationFrameId.current = requestAnimationFrame(smoothMouseMovement)
     }
@@ -44,13 +47,11 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
   const positionBufferRef = useRef<WebGLBuffer | null>(null)
 
   const cleanup = useCallback(() => {
-    // Cancel any ongoing animation frame
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current)
       animationFrameRef.current = null
     }
 
-    // Clean up WebGL resources
     const gl = glRef.current
     const program = programRef.current
     const positionBuffer = positionBufferRef.current
@@ -59,7 +60,6 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
       gl.deleteProgram(program)
       gl.deleteBuffer(positionBuffer)
 
-      // Reset refs
       glRef.current = null
       programRef.current = null
       positionBufferRef.current = null
@@ -76,7 +76,6 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
       return
     }
 
-    // Store gl context in ref
     glRef.current = gl
 
     const resizeCanvas = () => {
@@ -89,13 +88,27 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({ mousePosition }) => {
     window.addEventListener('resize', resizeCanvas)
 
     const vertexShaderSource = `
-      attribute vec4 a_position;
-      varying vec2 v_texCoord;
+   attribute vec4 a_position;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
 
-      void main() {
-        v_texCoord = a_position.xy * 0.5 + 0.5;
-        gl_Position = a_position;
-      }
+void main() {
+    // Normalize vertex positions (from -1 to 1 in clip space)
+    vec3 normalizedPosition = a_position.xyz;
+
+    // Calculate deformation based on sine wave
+    float wave = sin(normalizedPosition.x * 10.0 + u_time) * 0.2; // Z offset
+    normalizedPosition.z += wave; // Add deformation along Z
+
+    // Pass texture coordinates to the fragment shader
+    v_texCoord = normalizedPosition.xy * 0.5 + 0.5;
+
+    // Set final position
+    gl_Position = vec4(normalizedPosition, 1.0);
+}
+
+
     `
 
     const fragmentShaderSource = `
@@ -128,7 +141,7 @@ vec2 particleMotion(vec2 st, vec2 mouse, float time) {
   float distanceToMouse = length(st - mouse);
   
   // Create a ripple effect
-  float ripple = sin(distanceToMouse * 20.0 - time * 5.0);
+  float ripple = sin(distanceToMouse * 35.0 - time * 5.0);
   
   // Directional pull towards mouse
   vec2 mouseDirection = normalize(mouse - st);
@@ -233,7 +246,7 @@ f += finerNoise * 0.1; // Blend with base noise
     const render = (time: number) => {
       if (!glRef.current || !programRef.current) return
 
-      time *= 0.0005 // Reduced speed to lower computational load
+      time *= 0.0005
 
       gl.clearColor(0, 0, 0, 1)
       gl.clear(gl.COLOR_BUFFER_BIT)
@@ -249,16 +262,12 @@ f += finerNoise * 0.1; // Blend with base noise
 
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
-      // Use the ref to schedule next frame
       animationFrameRef.current = requestAnimationFrame(render)
     }
 
-    // Initial render
     animationFrameRef.current = requestAnimationFrame(render)
 
-    // Cleanup function
     return () => {
-      // Remove resize listener
       window.removeEventListener('resize', resizeCanvas)
 
       cleanup()
@@ -266,10 +275,10 @@ f += finerNoise * 0.1; // Blend with base noise
   }, [smoothMousePosition, cleanup])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full  z-[-1]"
-    />
+    <div className="relative w-full h-full">
+      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+      <div className="relative z-10">{children}</div>
+    </div>
   )
 }
 
