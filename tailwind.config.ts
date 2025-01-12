@@ -13,6 +13,7 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        yellow: '#FAD658',
       },
       fontFamily: {
         montserrat: ['var(--font-montserrat)', 'sans-serif'],

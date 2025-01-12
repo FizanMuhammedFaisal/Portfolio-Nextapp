@@ -5,7 +5,6 @@ import Header from '../Header'
 interface TransitionProps {
   children: React.ReactNode
   variants?: Variants
-  includeHeader?: boolean
 }
 
 function Transition({ children, variants, includeHeader }: TransitionProps) {
@@ -17,8 +16,6 @@ function Transition({ children, variants, includeHeader }: TransitionProps) {
   const animVariants = variants || defaultVariants
   return (
     <div>
-      {!includeHeader ? <Header /> : ''}
-
       <motion.div
         key="transition"
         initial="initial"
@@ -26,7 +23,6 @@ function Transition({ children, variants, includeHeader }: TransitionProps) {
         exit="exit"
         variants={animVariants}
       >
-        {includeHeader ? <Header /> : ''}
         {children}
       </motion.div>
     </div>

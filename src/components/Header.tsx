@@ -10,7 +10,6 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useRef, useState } from 'react'
-// import TransitionLink from './links/TransitionLink'
 
 const TOP_SCROLL_LIMIT =
   typeof window !== 'undefined' ? window.innerHeight * 0.9 : 200

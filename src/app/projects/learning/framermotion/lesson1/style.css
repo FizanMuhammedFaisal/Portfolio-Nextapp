@@ -1,0 +1,43 @@
+/* For WebKit browsers (Chrome, Safari, etc.) */
+input[type='range']::-webkit-slider-thumb {
+  background-color: #444;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* For Firefox */
+input[type='range']::-moz-range-thumb {
+  background-color: #444;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* For IE and Edge */
+input[type='range']::-ms-thumb {
+  background-color: #444;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Hover effect for thumb */
+input[type='range']:hover::-webkit-slider-thumb,
+input[type='range']:hover::-moz-range-thumb,
+input[type='range']:hover::-ms-thumb {
+  background-color: black; /* Change thumb color on hover */
+}

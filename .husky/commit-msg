@@ -1,4 +1,13 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-npx commitlint --edit 
+npx commitlint --edit "$1" || {
+  echo "\033[0;31mYour commit message is invalid! Follow this format:\033[0m"
+  echo ""
+  echo "  type(scope?): subject"
+  echo ""
+  echo "Examples:"
+  echo "  feat: add a new user login page"
+  echo "  fix(auth): resolve login failure issue"
+  exit 1
+}
