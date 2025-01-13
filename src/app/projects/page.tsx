@@ -1,5 +1,6 @@
 import Transition from '@/components/layout/Transition'
 import { Variants } from 'motion/react'
+import Link from 'next/link'
 import React from 'react'
 
 function page() {
@@ -10,13 +11,14 @@ function page() {
   }
   return (
     <Transition>
-      <div className="bg-slate-400 ">
-        {[...Array(400)].map((_, i) => (
-          <p key={i} className="text-lg text-black/70 text-center">
-            This is paragraph {i + 1}. Scroll quickly up and down to see the
-            header animation effect.
+      <div className=" ">
+        <Link href={'/projects/learnings'}>
+          {' '}
+          <p className="text-green-300 mt-20 text-center">
+            {' '}
+            check out learnings
           </p>
-        ))}
+        </Link>
       </div>
     </Transition>
   )

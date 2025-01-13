@@ -24,7 +24,7 @@ export default function LearningJourney() {
   return (
     <div className="min-h-screen mt-24 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-[#2d6a4f] via-[#52b788] to-[#40916c]  mb-8">
+        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-[#576a2d] via-[#52b788] to-[#40916c]  mb-8">
           Learning Motion
         </h1>
         <p className="text-xl text-center text-gray-300 mb-12">
@@ -54,13 +54,13 @@ export default function LearningJourney() {
           </p>
           <Link
             href="https://emilkowal.ski/ui/great-animations"
-            className="text-gray-400 hover:text-yellow transition-colors duration-300"
+            className=" group text-gray-400 hover:text-yellow/70 transition-colors duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
             Explore Emil Kowal's{' '}
             <ShinyText
-              className="hover:text-yellow/50"
+              className="group-hover:text-yellow/90 transition-colors duration-300"
               text="Great Animations"
             />
           </Link>

@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Transition from '@/components/layout/Transition'
 import WebGLBackground from '@/components/shader/WebglBackground'
 import useLenis from '@/hooks/useLenis'
-import { TerminalWindow } from '@/components/TerminalWindow'
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -22,7 +21,7 @@ export default function Home() {
 
   return (
     <Transition>
-      {/* <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
+      <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
         <WebGLBackground mousePosition={mousePosition}>
           <div className="flex flex-col min-h-screen justify-center items-center p-4 text-white">
             <motion.div
@@ -97,9 +96,6 @@ export default function Home() {
             Hey there
           </motion.h2>
         </div>
-      </div> */}
-      <div className="mt-20">
-        <TerminalWindow />
       </div>
       <div className="min-h-screen bg-black"></div>
     </Transition>
