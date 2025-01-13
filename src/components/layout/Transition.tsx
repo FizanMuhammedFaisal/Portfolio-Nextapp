@@ -7,7 +7,7 @@ interface TransitionProps {
   variants?: Variants
 }
 
-function Transition({ children, variants, includeHeader }: TransitionProps) {
+function Transition({ children, variants }: TransitionProps) {
   const defaultVariants: Variants = {
     initial: { opacity: 0 },
     enter: { opacity: 1, transition: { duration: 1 } },

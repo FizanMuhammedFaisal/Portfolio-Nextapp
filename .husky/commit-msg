@@ -7,7 +7,7 @@ npx commitlint --edit "$1" || {
   echo "  type(scope?): subject"
   echo ""
   echo "Examples:"
-  echo "  feat: add a new user login page"
-  echo "  fix(auth): resolve login failure issue"
+  echo "  feat: Add a new user login page"
+  echo "  fix(auth): Resolve login failure issue"
   exit 1
 }
