@@ -22,7 +22,7 @@ function Page() {
           <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto overflow-hidden ">
             <Image
               src="/placeholder.svg?height=400&width=400"
-              alt="Your Name"
+              alt="Fizan Muhammed Faisal"
               layout="fill"
               objectFit="cover"
             />
