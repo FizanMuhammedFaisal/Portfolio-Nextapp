@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ShinyText from '@/components/Animations/ShinyText/ShinyText'
 
@@ -16,7 +16,7 @@ export default function LearningJourney() {
       path: 'framermotion/lesson2',
     },
     {
-      title: 'Advanced Transitions',
+      title: 'Exit Animations',
       path: 'framermotion/lesson3',
     },
   ]
@@ -24,7 +24,7 @@ export default function LearningJourney() {
   return (
     <div className="min-h-screen mt-24 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-[#576a2d] via-[#52b788] to-[#40916c]  mb-8">
+        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-yellow via-[#c0b65f] to-yellow  mb-8">
           Learning Motion
         </h1>
         <p className="text-xl text-center text-gray-300 mb-12">

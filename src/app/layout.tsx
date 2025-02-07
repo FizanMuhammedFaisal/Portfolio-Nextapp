@@ -3,6 +3,7 @@ import './globals.css'
 import { Raleway, Montserrat } from 'next/font/google'
 import { TransitionProvider } from '@/context/TransitionContext'
 import Header from '@/components/Header'
+import { HeaderProvider } from '@/context/HeaderContext'
 const raleway = Raleway({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -27,10 +28,12 @@ export default function RootLayout({
       <body
         className={`${raleway.className} ${montserrat.className} antialiased`}
       >
-        <TransitionProvider>
-          <Header />
-          <>{children}</>
-        </TransitionProvider>
+        <HeaderProvider>
+          <TransitionProvider>
+            <Header />
+            <>{children}</>
+          </TransitionProvider>
+        </HeaderProvider>
       </body>
     </html>
   )

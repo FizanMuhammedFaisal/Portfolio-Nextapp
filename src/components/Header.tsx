@@ -1,5 +1,6 @@
 'use client'
 
+import { useHeader } from '@/context/HeaderContext'
 import clsx from 'clsx'
 import {
   AnimatePresence,
@@ -37,7 +38,7 @@ function Header() {
   const lastScrollPosition = useRef(0)
   const lastTimestamp = useRef(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-
+  const { headerColor } = useHeader()
   useMotionValueEvent(scrollY, 'change', (currentScrollY) => {
     const currentTime = Date.now()
     const Distance = Math.abs(currentScrollY - lastScrollPosition.current)
@@ -65,7 +66,7 @@ function Header() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="flex justify-center top-0 fixed left-0 right-0 z-50 pointer-events-none rounded-md overflow-hidden"
     >
-      <div className="flex justify-center max-w-96 min-w-11 mt-2 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
+      <div className="flex justify-center max-w-96 min-w-11 mt-5 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
         <div className="absolute inset-0 z-50  bg-white/10 rounded-md pointer-events-none"></div>
 
         <motion.ul className="flex px-4 py-2 relative z-10">
@@ -98,7 +99,7 @@ function Header() {
                         <motion.div
                           layoutId="hovered"
                           className={clsx(
-                            'absolute inset-0 bg-black/20 rounded-md'
+                            'absolute inset-0 bg-white/5 rounded-md'
                           )}
                           initial={false}
                           transition={{
@@ -112,7 +113,7 @@ function Header() {
 
                     <span
                       className={`relative z-10  ${
-                        isSelected ? 'text-green-500' : 'text-white'
+                        isSelected ? headerColor : 'text-white'
                       }`}
                     >
                       {link.label}

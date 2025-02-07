@@ -1,6 +1,6 @@
 'use client'
-
-import { useState, useEffect } from 'react'
+import './style.css'
+import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Transition from '@/components/layout/Transition'
 import WebGLBackground from '@/components/shader/WebglBackground'
@@ -31,32 +31,47 @@ export default function Home() {
               transition={{ duration: 1 }}
               style={{ y }}
             >
-              <div className="flex flex-wrap justify-center items-baseline">
+              <motion.div
+                whileHover={{
+                  scale: 1.05,
+                  color: '#ffffff',
+                  transition: {
+                    scale: { duration: 1 },
+                    color: { duration: 1 },
+                  },
+                }}
+                className="flex flex-wrap justify-center items-baseline"
+              >
                 {nameArray.map((word, index) => (
                   <motion.span
                     key={index}
-                    initial={{ opacity: 0.5 }}
-                    animate={{ opacity: 1 }}
-                    whileHover={{ scale: 1.05, color: '#ffffff' }}
-                    transition={{
-                      duration: 0.9,
-                      delay: index * 0.2,
-                      ease: [0.43, 0.13, 0.23, 0.96],
+                    initial={{
+                      '--from-color': '#ffffff',
+                      '--via-color': '#8ea0b8',
+                      '--to-color': '#ffffff',
                     }}
-                    className={`inline-block text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter mr-2 sm:mr-4 bg-gradient-to-br from-white via-slate-400 to-slate-100 bg-clip-text text-transparent ${
-                      index === 1
-                        ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl align-top mt-1 sm:mt-2 md:mt-3 lg:mt-4'
-                        : ''
-                    }`}
+                    animate={{
+                      '--from-color': '#8ea0b8',
+                      '--via-color': '#F1F5FA',
+                      '--to-color': '#8ea0b8',
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatDelay: 0.5,
+                      delay: index * 0.5,
+                      repeatType: 'reverse',
+                    }}
+                    className={`inline-block  text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter mr-2 sm:mr-4 bg-clip-text text-transparent `}
                     style={{
                       lineHeight: '0.9',
-                      textShadow: '0 0 10px rgba(255,255,255,0.3)',
+                      backgroundImage: `linear-gradient(to bottom right, var(--from-color), var(--via-color), var(--to-color))`,
                     }}
                   >
                     {word}
                   </motion.span>
                 ))}
-              </div>
+              </motion.div>
               <motion.div
                 className="absolute -bottom-2 sm:-bottom-4 left-0 w-full h-1 bg-green-800"
                 initial={{ scaleX: 0 }}
