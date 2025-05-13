@@ -1,6 +1,3 @@
-import { Tokenization } from './tokenization.tsx'
-import { SelfAttention } from './self-attention.tsx'
-import { LLM } from './llm.tsx'
 import Image from 'next/image'
 import embeddings from './embeddings.jpg'
 import BlogHeaderCard from '../../../../components/content/card/BlogHeaderCard.tsx'
@@ -47,8 +44,6 @@ Then, there’s an API or chat interface where you can talk to the model. Based 
 
 AI models are built on [neural networks](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) — think of them as a giant web of decision-making pathways that learn from examples. Neural networks can be used for anything, but I'll focus on language models.
 
-## <LLM />
-
 These networks consist of layers of interconnected _neurons_ that process information:
 
 1.  An **input layer** where data enters the system. Input is converted into a numerical representation of words or _tokens_ (more on tokens later).
@@ -67,8 +62,6 @@ These additional layers enable the network to learn complex patterns. For exampl
 
 You can ask a question in English, and get a response back in Japanese.
 
-## Tokenization
-
 Before a neural network can process text, the text must be converted into numerical data—a process known as **tokenization**.
 
 1. Tokenization breaks down text into smaller units called **tokens**.
@@ -76,8 +69,6 @@ Before a neural network can process text, the text must be converted into numeri
 3. Models learn to understand the statistical relationships between these tokens, which helps them predict and produce the next token in a given sequence.
 
 To handle the complexity of human language—including rare words and misspellings—models use _subword_ tokenization techniques like [**Byte Pair Encoding (BPE)**](https://www.perplexity.ai/search/what-is-byte-pair-encoding-bpe-MV_w_T17RWG6sZUqRl2pIA). BPE starts with individual characters and iteratively merges the most frequent pairs of symbols to form new tokens.
-
-## <Tokenization />
 
 For instance, the word "unbelievable" might be [tokenized](https://platform.openai.com/tokenizer) into `["un", "believ","able"]`. This allows the model to understand and generate words it has not explicitly seen during training. Newer models have also developed specialized tokenizers for processing math and code, as both have unique syntax and structure.
 
@@ -154,8 +145,6 @@ Transformers use **attention mechanisms**, specifically **self-attention**. Whil
 This allows the model to focus on different parts of the input when generating each part of the output, much like how a human understands language by considering the context of a sentence or paragraph.
 
 For example, in the sentence "The cat sat on the mat because it was tired," the word "it" refers to "cat." Self-attention helps the model establish this connection by assigning higher weights to related words, enabling it to understand that "it" refers to "cat" and not "mat."
-
-<SelfAttention />
 
 By utilizing self-attention, transformers can process entire sequences of data in parallel rather than one element at a time, making training faster and more efficient—especially when leveraging GPUs.
 
