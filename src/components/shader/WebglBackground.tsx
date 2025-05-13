@@ -29,8 +29,8 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
   const animationFrameRef = useRef<number | null>(null)
   const [smoothMousePosition, setSmoothMousePosition] = useState<MousePosition>(
     {
-      x: window?.innerWidth / 2,
-      y: window?.innerHeight / 2,
+      x: 0,
+      y: 0,
     }
   )
   const animationFrameId = useRef<number | null>(null)
@@ -47,6 +47,16 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     directionMultiplier: 1,
   })
   useEffect(() => {
+    // Initialize smoothMousePosition with window dimensions
+    if (typeof window !== 'undefined') {
+      setSmoothMousePosition({
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      })
+    }
+  }, [])
+  useEffect(() => {
+    if (typeof window === 'undefined') return
     if (mousePosition) {
       // Follow the provided mouse position
       const smoothMouseMovement = () => {
@@ -166,6 +176,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
   }, [])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const canvas = canvasRef.current
     if (!canvas || !isVisible) return
 

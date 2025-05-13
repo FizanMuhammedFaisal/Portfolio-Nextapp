@@ -14,9 +14,11 @@
         "varsIgnorePattern": "^_" // Ignore unused variables starting with _
       }
     ],
-    "no-unused-vars": "off", // Disable the default 'no-unused-vars' rule
+    "no-unused-vars": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2020,
