@@ -13,6 +13,6 @@ export default function ProjectsLayout({
     return () => {
       setHeaderColor('text-green-500')
     }
-  }, [])
+  }, [setHeaderColor])
   return children
 }

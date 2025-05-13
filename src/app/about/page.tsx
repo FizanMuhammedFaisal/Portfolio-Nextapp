@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Transition from '@/components/layout/Transition'
 
 import useLenis from '@/hooks/useLenis'
 import Image from 'next/image'
-import { motion } from 'motion/react'
 
 function Page() {
   useLenis()

@@ -4,7 +4,7 @@ import ExampleCard from '@/components/content/card/ExampleCard'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import React from 'react'
-motion
+
 function page() {
   return (
     <div className="w-full">

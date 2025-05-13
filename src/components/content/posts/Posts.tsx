@@ -3,7 +3,7 @@ import { getBlogPosts } from '@/utils/blog'
 import Link from 'next/link'
 
 function Posts() {
-  let allBlogs = getBlogPosts()
+  const allBlogs = getBlogPosts()
   console.log(allBlogs)
   return (
     <div className="space-y-8">

@@ -1,8 +1,8 @@
 import './ShinyText.scss'
 interface ShinyText {
   text: string
-  disabled?: Boolean
-  speed?: Number
+  disabled?: boolean
+  speed?: number
   className?: string
 }
 const ShinyText = ({

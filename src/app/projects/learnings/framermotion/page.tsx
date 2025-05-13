@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import ShinyText from '@/components/Animations/ShinyText/ShinyText'
 

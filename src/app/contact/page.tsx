@@ -3,7 +3,7 @@ import Transition from '@/components/layout/Transition'
 import useLenis from '@/hooks/useLenis'
 import React from 'react'
 
-function page() {
+function Page() {
   useLenis()
   return (
     <Transition>
@@ -12,4 +12,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

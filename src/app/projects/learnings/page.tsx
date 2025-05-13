@@ -3,7 +3,7 @@ import { useHeader } from '@/context/HeaderContext'
 import Link from 'next/link'
 import React from 'react'
 
-function page() {
+function Page() {
   const { setHeaderColor } = useHeader()
 
   return (
@@ -27,4 +27,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

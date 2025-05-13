@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import './style.css'
 import ExampleCard from '@/components/content/card/ExampleCard'
 import Slider from '@/components/content/Sliders/Slider'
-function page() {
+function Page() {
   const [bounce, setBounce] = useState(0.5)
   const [mass, setMass] = useState(0.5)
   const [damping, setDamping] = useState(1)
@@ -181,4 +181,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

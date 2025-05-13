@@ -19,8 +19,8 @@ interface TransitionLinkProps extends LinkProps {
 function TransitionLink({
   children,
   href,
-  exitAnimation = { opacity: 0, y: 10, scale: 0.8 },
-  animationDuration = 100,
+  _exitAnimation = { opacity: 0, y: 10, scale: 0.8 },
+  _animationDuration = 100,
   className = '',
   ...props
 }: TransitionLinkProps) {

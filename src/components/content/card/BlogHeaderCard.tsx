@@ -1,22 +1,19 @@
 'use client'
 import React from 'react'
-import Image from 'next/image'
 import { Calendar, User } from 'lucide-react'
 import { motion } from 'motion/react'
 
 interface BlogHeaderCardProps {
   author: string
   date: string
-  imageSrc: string
-  imageAlt: string
+  // imageSrc: string
+  // imageAlt: string
   title: string
 }
 
 const BlogHeaderCard: React.FC<BlogHeaderCardProps> = ({
   author,
   date,
-  imageSrc,
-  imageAlt,
   title,
 }) => {
   return (

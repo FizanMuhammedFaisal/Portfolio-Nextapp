@@ -1,5 +1,5 @@
 'use client'
-import ShinyText from '@/components/Animations/ShinyText/ShinyText'
+
 import ExampleCard from '@/components/content/card/ExampleCard'
 import React from 'react'
 import Component1, { AnimatingSquareCode } from './activites/Component1'

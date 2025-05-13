@@ -77,7 +77,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         directionMultiplier: 1,
       }
 
-      const autonomousMovement = (time: number) => {
+      const autonomousMovement = (_time: number) => {
         const elapsedTime = Date.now() - startTime.current
         const timeSinceDirectionChange =
           Date.now() - lastDirectionChange.current
