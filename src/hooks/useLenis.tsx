@@ -6,8 +6,13 @@ import Lenis from '@studio-freight/lenis'
 const useLenis = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.3,
+      duration: 0.6,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+
+      lerp: 0.4,
+      autoResize: true,
     })
 
     const raf = (time: number) => {

@@ -27,6 +27,7 @@ const links: NavLink[] = [
   { href: '/about', label: 'About', icon: 'User' },
   { href: '/projects', label: 'Projects', icon: 'Code2' },
   { href: '/contact', label: 'Contact', icon: 'Mail' },
+  { href: '/blog', label: 'Blogs', icon: 'Book' },
 ]
 
 function Header() {
@@ -66,8 +67,8 @@ function Header() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="flex justify-center top-0 fixed left-0 right-0 z-50 pointer-events-none rounded-md overflow-hidden"
     >
-      <div className="flex justify-center max-w-96 min-w-11 mt-5 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
-        <div className="absolute inset-0 z-50  bg-white/10 rounded-md pointer-events-none"></div>
+      <div className="flex justify-center  min-w-11 mt-5 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
+        <div className="absolute inset-0 z-50  bg-black/30 border-white/10 border rounded-md pointer-events-none"></div>
 
         <motion.ul className="flex px-4 py-2 relative z-10">
           {links.map((link, i) => {
@@ -79,9 +80,7 @@ function Header() {
                 <AnimatePresence>
                   <Link
                     href={link.href}
-                    className={clsx(
-                      'block relative py-1 px-3 rounded-md hover:text-white/75'
-                    )}
+                    className={clsx('block relative py-1 px-3 rounded-md ')}
                     onMouseEnter={() => setSelectedIndex(i)}
                     onMouseLeave={() => setSelectedIndex(null)}
                   >
@@ -99,13 +98,13 @@ function Header() {
                         <motion.div
                           layoutId="hovered"
                           className={clsx(
-                            'absolute inset-0 bg-white/5 rounded-md'
+                            'absolute inset-0 bg-white/15 rounded-md'
                           )}
                           initial={false}
                           transition={{
                             type: 'spring',
                             stiffness: 400,
-                            damping: 40,
+                            damping: 50,
                           }}
                         />
                       )}
@@ -113,7 +112,9 @@ function Header() {
 
                     <span
                       className={`relative z-10  ${
-                        isSelected ? headerColor : 'text-white'
+                        isSelected
+                          ? `${headerColor} font-medium `
+                          : 'text-amber-50'
                       }`}
                     >
                       {link.label}

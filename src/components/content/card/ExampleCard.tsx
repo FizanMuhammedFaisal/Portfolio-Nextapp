@@ -1,5 +1,6 @@
 import CodePreview from '@/components/code/CodePreview'
-
+import React from 'react'
+import jsxToString from 'react-element-to-jsx-string'
 interface Card {
   content: React.ReactNode
   description: String
@@ -7,6 +8,15 @@ interface Card {
   code?: string
 }
 const ExampleCard = ({ content, description, controls, code }: Card) => {
+  const generatedCode =
+    code ||
+    jsxToString(content, {
+      displayName: (el) =>
+        React.isValidElement(el) && typeof el.type !== 'string'
+          ? el.type.name || ''
+          : '',
+    })
+
   return (
     <div className=" p-4 rounded-lg">
       <div className="flex flex-col items-center space-y-4">

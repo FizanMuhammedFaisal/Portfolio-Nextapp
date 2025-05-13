@@ -1,5 +1,5 @@
 'use client'
-import './style.css'
+
 import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Transition from '@/components/layout/Transition'
@@ -22,8 +22,12 @@ export default function Home() {
   return (
     <Transition>
       <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
-        <WebGLBackground mousePosition={mousePosition}>
-          <div className="flex flex-col min-h-screen justify-center items-center p-4 text-white">
+        <WebGLBackground
+          baseColor1={[0.0, 0.0, 0.07]}
+          baseColor2={[0.0, 0.5, 0.2]}
+          mousePosition={mousePosition}
+        >
+          <div className="flex  flex-col min-h-screen justify-center items-center p-4 text-white">
             <motion.div
               className="mb-8 sm:mb-12 relative"
               initial={{ opacity: 0 }}
@@ -42,35 +46,34 @@ export default function Home() {
                 }}
                 className="flex flex-wrap justify-center items-baseline"
               >
-                {nameArray.map((word, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{
-                      '--from-color': '#ffffff',
-                      '--via-color': '#8ea0b8',
-                      '--to-color': '#ffffff',
-                    }}
-                    animate={{
-                      '--from-color': '#8ea0b8',
-                      '--via-color': '#F1F5FA',
-                      '--to-color': '#8ea0b8',
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 0.5,
-                      delay: index * 0.5,
-                      repeatType: 'reverse',
-                    }}
-                    className={`inline-block  text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter mr-2 sm:mr-4 bg-clip-text text-transparent `}
-                    style={{
-                      lineHeight: '0.9',
-                      backgroundImage: `linear-gradient(to bottom right, var(--from-color), var(--via-color), var(--to-color))`,
-                    }}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
+                {nameArray.map((word, index) => {
+                  return (
+                    <motion.span
+                      key={`${word}-${index}`}
+                      initial={{
+                        backgroundImage:
+                          'linear-gradient(to bottom right, #ffffff, #8ea0b8, #ffffff)',
+                      }}
+                      animate={{
+                        backgroundImage:
+                          'linear-gradient(to bottom right, #8ea0b8, #F1F5FA, #8ea0b8)',
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: 0.5,
+                        delay: index * 0.3,
+                        repeatType: 'reverse',
+                      }}
+                      className={`inline-block text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold tracking-tight mr-2 sm:mr-4 bg-clip-text text-transparent`}
+                      style={{
+                        lineHeight: '0.9',
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  )
+                })}
               </motion.div>
               <motion.div
                 className="absolute -bottom-2 sm:-bottom-4 left-0 w-full h-1 bg-green-800"

@@ -24,7 +24,7 @@ export default function LearningJourney() {
   return (
     <div className="min-h-screen mt-24 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-yellow via-[#c0b65f] to-yellow  mb-8">
+        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-[#e8d94c] to-yellow-300  mb-8">
           Learning Motion
         </h1>
         <p className="text-xl text-center text-gray-300 mb-12">

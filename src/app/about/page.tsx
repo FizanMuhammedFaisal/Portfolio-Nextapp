@@ -13,9 +13,9 @@ function Page() {
   return (
     <Transition>
       <div>
-        <h1 className=" text-5xl text-center mt-32 font-bold bg-clip-text text-transparent bg-gradient-to-b from-green-600 via-green-500 to-green-600">
-          About Me
-        </h1>
+        {/* <h1 className=" text-5xl text-center mt-32 font-bold bg-clip-text text-transparent bg-gradient-to-b from-green-600 via-green-500 to-green-600">
+          Fizan Muhammed Faisal
+        </h1> */}
       </div>
       <div className=" mx-20 mt-20 bg-black text-white flex flex-col lg:flex-row items-center justify-center p-8">
         <div className="w-full lg:w-1/2 space-y-12 mb-12 lg:mb-0">

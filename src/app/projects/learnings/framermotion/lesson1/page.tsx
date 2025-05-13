@@ -78,22 +78,6 @@ function page() {
               </motion.button>
             }
             description={'Button with a scale repeat'}
-            code={`
-<motion.button
-  className="bg-gray-600  px-2 py-1"
-  initial={{ scale: 1 }}
-  animate={{ scale: 2 }}
-  transition={{
-    delay: 1,
-    ease: 'easeInOut',
-    repeat: Infinity,
-    repeatType: 'reverse',
-    repeatDelay: 0.2,
-  }}
->
-  Click Me
-</motion.button>
-              `}
           />
 
           <ExampleCard
