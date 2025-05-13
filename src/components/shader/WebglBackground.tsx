@@ -176,7 +176,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     }
 
     glRef.current = gl
-
+    if (typeof window === 'undefined') return
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight

@@ -59,6 +59,7 @@
     "@types/three": "^0.176.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.4",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.11",
