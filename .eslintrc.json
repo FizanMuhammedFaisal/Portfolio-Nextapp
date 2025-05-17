@@ -7,13 +7,6 @@
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_", // Ignore unused function args starting with _
-        "varsIgnorePattern": "^_" // Ignore unused variables starting with _
-      }
-    ],
     "no-unused-vars": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
@@ -23,6 +16,6 @@
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
-    "project": "./tsconfig.json" // Point to your tsconfig for types
+    "project": "./tsconfig.json"
   }
 }

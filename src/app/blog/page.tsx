@@ -41,9 +41,9 @@ export default function Home() {
   // [0.00, 0.55, 0.00]
   // Noise Scale: 0.5
 
-  const [baseColor1] = useState<[number, number, number]>([0.01, 0.01, 0.11])
-  const [baseColor2] = useState<[number, number, number]>([0.03, 0.1, 0.0])
-  const [noiseScale] = useState(5.5)
+  const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.18])
+  const [baseColor2] = useState<[number, number, number]>([0.0, 0.35, 0.0])
+  const [noiseScale] = useState(1.0)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -62,8 +62,8 @@ export default function Home() {
 
   return (
     <WebGLBackground
-      baseColor1={baseColor1}
-      baseColor2={baseColor2}
+      // baseColor1={baseColor1}
+      // baseColor2={baseColor2}
       noiseScale={noiseScale}
     >
       <main className="min-h-screen pt-28 font-sans">
@@ -106,8 +106,12 @@ export default function Home() {
 
         <section className="max-w-3xl mx-auto px-4 pb-12">
           <motion.div
-            className="backdrop-blur-xl bg-black/30 rounded-xl p-6 shadow-xl border border-white/10 relative overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
+            className="backdrop-blur-xl bg-black/30 rounded-xl p-6 shadow-xl border border-white/10 relative overflow-hidden "
+            initial={{
+              opacity: 0,
+              y: 20,
+              boxShadow: '0 0 0px rgba(255, 255, 255, 0)',
+            }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.4,
@@ -120,7 +124,6 @@ export default function Home() {
               transition: { duration: 0.3 },
             }}
           >
-            {/* Decorative elements */}
             <motion.div
               className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-3xl"
               animate={{
@@ -178,7 +181,11 @@ export default function Home() {
 
                     <motion.h3
                       className="text-lg font-light mb-2 text-white group-hover:text-white/90 transition-colors duration-300"
-                      animate={hoveredItem === index ? { x: 6 } : { x: 0 }}
+                      animate={
+                        hoveredItem === index
+                          ? { scale: 0.99, x: 1 }
+                          : { x: 0, scale: 1 }
+                      }
                       transition={{
                         type: 'spring',
                         stiffness: 200,
@@ -218,7 +225,7 @@ export default function Home() {
             </motion.ul>
 
             <motion.div
-              className="mt-6 text-center"
+              className="mt-6 text-center flex justify-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.3 }}
