@@ -104,16 +104,6 @@ export default function Home() {
           </div>
           <div className="h-12 bg-gradient-to-b from-transparent via-black to-black flex items-center justify-center overflow-hidden"></div>
         </WebGLBackground>
-        <div className="min-h-screen">
-          <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-bold text-center mt-8 sm:mt-12 md:mt-16 lg:mt-20"
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            Hey there
-          </motion.h2>
-        </div>
       </div>
       <div className="min-h-screen bg-black"></div>
     </Transition>

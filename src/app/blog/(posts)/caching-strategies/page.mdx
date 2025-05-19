@@ -1,6 +1,8 @@
 import BlogHeaderCard from '../../../../components/mdx/BlogHeaderCard'
-import Image from 'next/image'
+import Image from '../../../../components/content/Image'
 import readthrough from './readthrough.webp'
+import writethrough from './writethrough.webp'
+
 export const metadata = {
   title: 'Caching Strategies',
   description: 'A brief overview on Different Caching Strategies.',
@@ -39,19 +41,24 @@ Read Through is best suited in places where data is read frequently but changes 
 and you are not highly concerned about data consistency
 this can offload the load from the database a lot
 
+---
+
 ## 2. Write Through
 
-In Write Through strategy the write operation is done in a different way. When application writes some data it is written on both cache and on database, which ensures that the data is consistent across both systems.in other words
-"Write to cache and write to the database — at the same time."
+In Write Through strategy the write operation is done in a different way. When application writes some data it is written on both cache and on database, which ensures that the data is consistent across both systems. In other words
+
+> "Write to cache and write to the database — at the **same time**."
+
+<Image src={writethrough} alt="Write Through Example" />
 
 #### How read works
 
 when data is read it is read from the cache system directly and here its always cache hit. We don't need to worry about data being stale because the write operation is done on both systems this ensures data consistency
 
-Write Through is can lead to slower writes and sometimes the all the cached data maynot be used and that is a waste of resource .Failure handling is another challenge here if the writing operation on cache or DB fails that leads to inconsistent state
+Write Through can lead to slower writes and sometimes the all the cached data maynot be used and that is a waste of resource. Failure handling is another challenge here if the writing operation on cache or DB fails that leads to inconsistent state
 
 #### when to use
 
-You need strong consistency between the cache and the database.
-Your application has frequent reads and regular writes.
-Read performance is critical and you want to avoid stale data.
+- You need strong consistency between the cache and the database.
+- Your application has frequent reads and regular writes.
+- Read performance is critical and you want to avoid stale data.
