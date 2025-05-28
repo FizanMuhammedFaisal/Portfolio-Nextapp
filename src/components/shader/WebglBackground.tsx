@@ -61,7 +61,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     }
   }, [])
 
-  const easeOutQuad = (t) => t * (2 - t)
+  const easeOutQuad = (t: number) => t * (2 - t)
 
   // Handle mouse position smoothing
   useEffect(() => {
