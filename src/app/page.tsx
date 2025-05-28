@@ -1,5 +1,6 @@
 'use client'
-
+// #117B58
+// #0D5F4B
 import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Transition from '@/components/layout/Transition'
@@ -18,13 +19,19 @@ export default function Home() {
   useLenis()
 
   const nameArray = ['Fizan', 'M', 'Faisal']
+  // baseColor1 = [0.0, 0.02, 0.05],
+  // baseColor2 = [0.0, 0.4, 0.1],
+  // noiseScale = 8.0
 
+  //   baseColor1={[0.0, 0.0, 0.07]}
+  // baseColor2={[0.0, 0.5, 0.2]}
   return (
     <Transition>
-      <div className="relative min-h-screen" onMouseMove={handleMouseMove}>
+      <div className="relative " onMouseMove={handleMouseMove}>
         <WebGLBackground
-          baseColor1={[0.0, 0.0, 0.07]}
-          baseColor2={[0.0, 0.5, 0.2]}
+          baseColor1={[0.0, 0.0, 0.0]}
+          baseColor2={[0.0, 0.4, 0.35]}
+          noiseScale={2.5}
           mousePosition={mousePosition}
         >
           <div className="flex  flex-col min-h-screen justify-center items-center p-4 text-white">
@@ -102,7 +109,13 @@ export default function Home() {
               </motion.p>
             </motion.div>
           </div>
-          <div className="h-12 bg-gradient-to-b from-transparent via-black to-black flex items-center justify-center overflow-hidden"></div>
+          <div
+            className="h-96 flex items-center justify-center overflow-hidden"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,1) 100%)',
+            }}
+          ></div>
         </WebGLBackground>
       </div>
       <div className="min-h-screen bg-black"></div>

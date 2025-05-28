@@ -41,8 +41,8 @@ export default function Home() {
   // [0.00, 0.55, 0.00]
   // Noise Scale: 0.5
 
-  const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.18])
-  const [baseColor2] = useState<[number, number, number]>([0.0, 0.35, 0.0])
+  const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.0])
+  const [baseColor2] = useState<[number, number, number]>([0.0, 0.45, 0.3])
   const [noiseScale] = useState(1.0)
 
   const containerVariants = {
@@ -62,8 +62,8 @@ export default function Home() {
 
   return (
     <WebGLBackground
-      // baseColor1={baseColor1}
-      // baseColor2={baseColor2}
+      baseColor1={baseColor1}
+      baseColor2={baseColor2}
       noiseScale={noiseScale}
     >
       <main className="min-h-screen pt-28 font-sans">

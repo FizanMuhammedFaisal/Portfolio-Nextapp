@@ -17,7 +17,7 @@
     "@mdx-js/react": "^3.1.0",
     "@next/font": "^14.2.15",
     "@next/mdx": "^15.3.1",
-    "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-slot": "^1.2.3",
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/postcss": "^4.1.4",
     "autoprefixer": "^10.4.21",
@@ -46,12 +46,12 @@
     "three": "^0.172.0"
   },
   "devDependencies": {
-    "@types/mdx": "^2.0.13",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",

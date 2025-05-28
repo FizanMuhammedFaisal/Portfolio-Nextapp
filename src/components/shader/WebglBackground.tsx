@@ -33,6 +33,10 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
       y: 0,
     }
   )
+  const [autonomousPosition, setAutonomousPosition] = useState<MousePosition>({
+    x: 0,
+    y: 0,
+  })
   const animationFrameId = useRef<number | null>(null)
   const glRef = useRef<WebGLRenderingContext | null>(null)
   const programRef = useRef<WebGLProgram | null>(null)
@@ -46,106 +50,37 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     noiseScale: 0.003,
     directionMultiplier: 1,
   })
+
   useEffect(() => {
-    // Initialize smoothMousePosition with window dimensions
+    // Initialize positions with window dimensions
     if (typeof window !== 'undefined') {
-      setSmoothMousePosition({
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2,
-      })
+      const initialX = window.innerWidth / 3
+      const initialY = window.innerHeight / 2
+      setSmoothMousePosition({ x: initialX, y: initialY })
+      setAutonomousPosition({ x: initialX, y: initialY })
     }
   }, [])
+
+  const easeOutQuad = (t) => t * (2 - t)
+
+  // Handle mouse position smoothing
   useEffect(() => {
     if (typeof window === 'undefined') return
+
     if (mousePosition) {
-      // Follow the provided mouse position
       const smoothMouseMovement = () => {
-        setSmoothMousePosition((prev) => ({
-          x: prev.x + (mousePosition.x - prev.x) * 0.025,
-          y: prev.y + (mousePosition.y - prev.y) * 0.025,
-        }))
-        animationFrameId.current = requestAnimationFrame(smoothMouseMovement)
-      }
+        setSmoothMousePosition((prev) => {
+          const dx = mousePosition.x - prev.x
+          const dy = mousePosition.y - prev.y
 
+          const easing = 0.08 // Slightly faster for mouse tracking
+          const easedX = prev.x + dx * easeOutQuad(easing)
+          const easedY = prev.y + dy * easeOutQuad(easing)
+
+          return { x: easedX, y: easedY }
+        })
+      }
       animationFrameId.current = requestAnimationFrame(smoothMouseMovement)
-
-      return () => {
-        if (animationFrameId.current) {
-          cancelAnimationFrame(animationFrameId.current)
-        }
-      }
-    } else {
-      const centerX = window.innerWidth / 2
-      const centerY = window.innerHeight / 2
-      const maxRadius = Math.min(centerX, centerY) * 0.7 // Larger movement area
-
-      pathParams.current = {
-        radiusX: maxRadius * (0.5 + Math.random() * 0.5),
-        radiusY: maxRadius * (0.5 + Math.random() * 0.5),
-        speed: 0.0002 + Math.random() * 0.0001,
-        noiseScale: 0.003,
-        directionMultiplier: 1,
-      }
-
-      const autonomousMovement = (_time: number) => {
-        const elapsedTime = Date.now() - startTime.current
-        const timeSinceDirectionChange =
-          Date.now() - lastDirectionChange.current
-
-        // Occasionally change direction and path parameters (every 10-15 seconds)
-        if (timeSinceDirectionChange > 10000 + Math.random() * 5000) {
-          pathParams.current = {
-            radiusX: maxRadius * (0.3 + Math.random() * 0.7),
-            radiusY: maxRadius * (0.3 + Math.random() * 0.7),
-            speed: 0.00001 + Math.random() * 0.00001,
-            noiseScale: 0.001 + Math.random() * 0.005,
-            directionMultiplier: Math.random() > 0.5 ? 1 : -1,
-          }
-          lastDirectionChange.current = Date.now()
-        }
-
-        // Base movement (elliptical path)
-        const baseX =
-          centerX +
-          Math.cos(
-            elapsedTime *
-              pathParams.current.speed *
-              pathParams.current.directionMultiplier
-          ) *
-            pathParams.current.radiusX
-        const baseY =
-          centerY +
-          Math.sin(
-            elapsedTime *
-              pathParams.current.speed *
-              0.7 *
-              pathParams.current.directionMultiplier
-          ) *
-            pathParams.current.radiusY
-
-        // Add noise layer (using a simple sine wave as "noise")
-        const noiseX =
-          Math.sin(elapsedTime * pathParams.current.noiseScale * 1.7) *
-          maxRadius *
-          0.15
-        const noiseY =
-          Math.sin(elapsedTime * pathParams.current.noiseScale * 2.3) *
-          maxRadius *
-          0.15
-
-        // Occasional slight pause (slow down movement briefly)
-        const slowdownFactor = Math.sin(elapsedTime * 0.0003) > 0.7 ? 0.2 : 1
-
-        // Apply smooth movement
-        setSmoothMousePosition((prev) => ({
-          x: prev.x + (baseX + noiseX - prev.x) * 0.02 * slowdownFactor,
-          y: prev.y + (baseY + noiseY - prev.y) * 0.02 * slowdownFactor,
-        }))
-
-        animationFrameId.current = requestAnimationFrame(autonomousMovement)
-      }
-
-      animationFrameId.current = requestAnimationFrame(autonomousMovement)
 
       return () => {
         if (animationFrameId.current) {
@@ -154,6 +89,88 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
       }
     }
   }, [mousePosition])
+
+  // Handle autonomous movement (continues regardless of mouse)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+    const maxRadius = Math.min(centerX, centerY) * 0.7
+
+    pathParams.current = {
+      radiusX: maxRadius * (0.5 + Math.random() * 0.5),
+      radiusY: maxRadius * (0.5 + Math.random() * 0.5),
+      speed: 0.0002 + Math.random() * 0.0001,
+      noiseScale: 0.003,
+      directionMultiplier: 1,
+    }
+
+    const autonomousMovement = (_time: number) => {
+      const elapsedTime = Date.now() - startTime.current
+      const timeSinceDirectionChange = Date.now() - lastDirectionChange.current
+
+      // Occasionally change direction and path parameters
+      if (timeSinceDirectionChange > 10000 + Math.random() * 5000) {
+        pathParams.current = {
+          radiusX: maxRadius * (0.3 + Math.random() * 0.7),
+          radiusY: maxRadius * (0.3 + Math.random() * 0.7),
+          speed: 0.00001 + Math.random() * 0.00001,
+          noiseScale: 0.001 + Math.random() * 0.005,
+          directionMultiplier: Math.random() > 0.5 ? 1 : -1,
+        }
+        lastDirectionChange.current = Date.now()
+      }
+
+      // Base autonomous movement (elliptical path)
+      const baseX =
+        centerX +
+        Math.cos(
+          elapsedTime *
+            pathParams.current.speed *
+            pathParams.current.directionMultiplier
+        ) *
+          pathParams.current.radiusX
+      const baseY =
+        centerY +
+        Math.sin(
+          elapsedTime *
+            pathParams.current.speed *
+            0.7 *
+            pathParams.current.directionMultiplier
+        ) *
+          pathParams.current.radiusY
+
+      // Add noise layer
+      const noiseX =
+        Math.sin(elapsedTime * pathParams.current.noiseScale * 1.7) *
+        maxRadius *
+        0.15
+      const noiseY =
+        Math.sin(elapsedTime * pathParams.current.noiseScale * 2.3) *
+        maxRadius *
+        0.15
+
+      // Occasional slowdown
+      const slowdownFactor = Math.sin(elapsedTime * 0.0003) > 0.7 ? 0.2 : 1
+
+      // Update autonomous position
+      setAutonomousPosition((prev) => ({
+        x: prev.x + (baseX + noiseX - prev.x) * 0.02 * slowdownFactor,
+        y: prev.y + (baseY + noiseY - prev.y) * 0.02 * slowdownFactor,
+      }))
+
+      animationFrameId.current = requestAnimationFrame(autonomousMovement)
+    }
+
+    animationFrameId.current = requestAnimationFrame(autonomousMovement)
+
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
+    }
+  }, []) // This effect runs once and creates continuous autonomous movement
 
   const cleanup = useCallback(() => {
     if (animationFrameRef.current) {
@@ -187,7 +204,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     }
 
     glRef.current = gl
-    if (typeof window === 'undefined') return
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -217,6 +234,7 @@ precision highp float;
 uniform float u_time;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
+uniform vec2 u_autonomousPos;
 uniform vec3 u_color1;
 uniform vec3 u_color2;
 uniform float u_noiseScale;
@@ -237,23 +255,42 @@ float noise(vec2 st) {
   return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
 }
 
-vec2 particleMotion(vec2 st, vec2 mouse, float time, float influence) {
-  float distanceToMouse = length(st - mouse);
-  float ripple = sin(distanceToMouse * 35.0 - time * 5.0);
-  vec2 mouseDirection = normalize(mouse - st);
-  float mouseInfluence = smoothstep(0.1, 0.9, distanceToMouse) * influence;
+vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influence) {
+  // Primary flow based on autonomous movement
+  vec2 autonomousNorm = autonomousPos / u_resolution.xy;
+  float distToAutonomous = length(st - autonomousNorm);
+  float autonomousRipple = sin(distToAutonomous * 25.0 - time * 3.0);
+  vec2 autonomousDirection = normalize(autonomousNorm - st);
+  float autonomousInfluence = smoothstep(0.2, 0.8, distToAutonomous);
+  
+  // Secondary mouse influence (much weaker)
+  vec2 mouseNorm = mouse / u_resolution.xy;
+  float distToMouse = length(st - mouseNorm);
+  float mouseRipple = sin(distToMouse * 40.0 - time * 6.0);
+  vec2 mouseDirection = normalize(mouseNorm - st);
+  float mouseInfluence = smoothstep(0.1, 0.6, distToMouse) * influence * 0.3; // Much weaker
+  
+  // Base noise movement
   vec2 noiseOffset = vec2(
-    noise(st * 10.0 + time),
-    noise(st * 10.0 + time + 100.0)
-  ) * 0.1;
-  return st + mouseDirection * mouseInfluence * 0.2 + noiseOffset + ripple * 0.05;
+    noise(st * 12.0 + time * 0.5),
+    noise(st * 12.0 + time * 0.5 + 100.0)
+  ) * 0.08;
+  
+  // Combine influences with autonomous being dominant
+  vec2 combinedFlow = st + 
+    autonomousDirection * autonomousInfluence * 0.25 +  // Strong autonomous influence
+    mouseDirection * mouseInfluence * 0.4 +             // Weak mouse influence
+    noiseOffset + 
+    autonomousRipple * 0.03 + 
+    mouseRipple * 0.008;
+    
+  return combinedFlow;
 }
 
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
-  vec2 mouse = u_mouse / u_resolution.xy;
-
-  st = particleMotion(st, mouse, u_time, u_particleInfluence);
+  
+  st = flowField(st, u_autonomousPos, u_mouse, u_time, u_particleInfluence);
 
   float f = noise(st * u_noiseScale + u_time * 0.1);
   f = noise(st + f);
@@ -317,6 +354,10 @@ void main() {
     const resolutionLocation = gl.getUniformLocation(program, 'u_resolution')
     const timeLocation = gl.getUniformLocation(program, 'u_time')
     const mouseLocation = gl.getUniformLocation(program, 'u_mouse')
+    const autonomousPosLocation = gl.getUniformLocation(
+      program,
+      'u_autonomousPos'
+    )
     const color1Location = gl.getUniformLocation(program, 'u_color1')
     const color2Location = gl.getUniformLocation(program, 'u_color2')
     const noiseScaleLocation = gl.getUniformLocation(program, 'u_noiseScale')
@@ -343,6 +384,11 @@ void main() {
         smoothMousePosition.x,
         canvas.height - smoothMousePosition.y
       )
+      gl.uniform2f(
+        autonomousPosLocation,
+        autonomousPosition.x,
+        canvas.height - autonomousPosition.y
+      )
       gl.uniform3f(color1Location, ...baseColor1)
       gl.uniform3f(color2Location, ...baseColor2)
       gl.uniform1f(noiseScaleLocation, noiseScale)
@@ -361,6 +407,7 @@ void main() {
     }
   }, [
     smoothMousePosition,
+    autonomousPosition,
     cleanup,
     isVisible,
     baseColor1,
