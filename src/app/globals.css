@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
 @import 'tailwindcss';
 
 body {
-  font-family: var(--font-geist-sans), Raleway, sans-serif;
+  font-family: var(--font-montserrat), Raleway, sans-serif;
   scroll-behavior: smooth;
   overflow-x: hidden;
   background-color: black;
@@ -85,6 +87,8 @@ body {
 @theme {
   --color-blog-black: #111110;
   --color-yellow: #fad658;
+  --color-greenP: #1bc79d;
+  --font-bebas: 'Outfit', 'sans-serif';
 }
 @layer base {
   :root {

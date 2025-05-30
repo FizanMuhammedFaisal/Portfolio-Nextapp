@@ -54,8 +54,8 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
   useEffect(() => {
     // Initialize positions with window dimensions
     if (typeof window !== 'undefined') {
-      const initialX = window.innerWidth / 3
-      const initialY = window.innerHeight / 2
+      const initialX = window.innerWidth / (Math.random() * 5)
+      const initialY = window.innerHeight / (Math.random() * 5)
       setSmoothMousePosition({ x: initialX, y: initialY })
       setAutonomousPosition({ x: initialX, y: initialY })
     }
@@ -266,7 +266,7 @@ vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influe
   // Secondary mouse influence (much weaker)
   vec2 mouseNorm = mouse / u_resolution.xy;
   float distToMouse = length(st - mouseNorm);
-  float mouseRipple = sin(distToMouse * 40.0 - time * 6.0);
+  float mouseRipple = sin(distToMouse * 12.0 - time * 6.0);
   vec2 mouseDirection = normalize(mouseNorm - st);
   float mouseInfluence = smoothstep(0.1, 0.6, distToMouse) * influence * 0.3; // Much weaker
   
@@ -282,7 +282,7 @@ vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influe
     mouseDirection * mouseInfluence * 0.4 +             // Weak mouse influence
     noiseOffset + 
     autonomousRipple * 0.03 + 
-    mouseRipple * 0.008;
+    mouseRipple * 0.009;
     
   return combinedFlow;
 }

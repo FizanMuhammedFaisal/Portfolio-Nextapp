@@ -5,12 +5,27 @@ import Transition from '@/components/layout/Transition'
 
 import useLenis from '@/hooks/useLenis'
 import Image from 'next/image'
+import WebGLBackground from '@/components/shader/WebglBackground'
 
 function Page() {
   useLenis()
 
   return (
     <Transition>
+      <WebGLBackground
+        baseColor1={[0.0, 0.0, 0.0]}
+        baseColor2={[0.0, 0.25, 0.28]}
+        noiseScale={0.5}
+      >
+        <div className="h-40"></div>
+        <div
+          className="h-11 flex items-center justify-center overflow-hidden"
+          style={{
+            background:
+              'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,1) 100%)',
+          }}
+        ></div>
+      </WebGLBackground>
       <div>
         {/* <h1 className=" text-5xl text-center mt-32 font-bold bg-clip-text text-transparent bg-gradient-to-b from-green-600 via-green-500 to-green-600">
           Fizan Muhammed Faisal

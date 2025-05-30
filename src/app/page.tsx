@@ -72,7 +72,7 @@ export default function Home() {
                         delay: index * 0.3,
                         repeatType: 'reverse',
                       }}
-                      className={`inline-block text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold tracking-tight mr-2 sm:mr-4 bg-clip-text text-transparent`}
+                      className={`inline-block text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold  font-bebas  mr-2 sm:mr-4 bg-clip-text text-transparent`}
                       style={{
                         lineHeight: '0.9',
                       }}
@@ -82,16 +82,6 @@ export default function Home() {
                   )
                 })}
               </motion.div>
-              <motion.div
-                className="absolute -bottom-2 sm:-bottom-4 left-0 w-full h-1 bg-green-800"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-                style={{
-                  filter: 'blur(4px)',
-                  opacity: 0.7,
-                }}
-              />
             </motion.div>
             <motion.div
               className="mb-16 sm:mb-24 md:mb-32"

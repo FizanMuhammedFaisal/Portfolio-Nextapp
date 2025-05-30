@@ -112,15 +112,15 @@ function Header() {
                       )}
                     </motion.div>
 
-                    <span
-                      className={`relative z-10  ${
+                    <motion.span
+                      className={`relative z-10 font-medium ${
                         isSelected
-                          ? `${headerColor} font-medium `
+                          ? `${headerColor} font-semibold  `
                           : 'text-amber-50'
                       }`}
                     >
                       {link.label}
-                    </span>
+                    </motion.span>
                   </Link>
                 </AnimatePresence>
               </motion.li>

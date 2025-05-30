@@ -14,7 +14,7 @@ interface HeaderProviderProps {
 
 // Create the provider component
 export const HeaderProvider: React.FC<HeaderProviderProps> = ({ children }) => {
-  const [headerColor, setHeaderColor] = useState<string>('text-green-500')
+  const [headerColor, setHeaderColor] = useState<string>('text-greenP')
 
   return (
     <HeaderContext.Provider value={{ headerColor, setHeaderColor }}>

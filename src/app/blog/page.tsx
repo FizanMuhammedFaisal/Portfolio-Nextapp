@@ -42,7 +42,7 @@ export default function Home() {
   // Noise Scale: 0.5
 
   const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.0])
-  const [baseColor2] = useState<[number, number, number]>([0.0, 0.45, 0.3])
+  const [baseColor2] = useState<[number, number, number]>([0.0, 0.45, 0.38])
   const [noiseScale] = useState(1.0)
 
   const containerVariants = {
