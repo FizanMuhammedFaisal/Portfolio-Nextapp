@@ -170,7 +170,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         cancelAnimationFrame(animationFrameId.current)
       }
     }
-  }, []) // This effect runs once and creates continuous autonomous movement
+  }, [])
 
   const cleanup = useCallback(() => {
     if (animationFrameRef.current) {
