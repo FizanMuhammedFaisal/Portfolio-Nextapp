@@ -12,7 +12,7 @@ export default function BlogLayout({
   return (
     <ViewTransition>
       <div className="w-full h-full bg-blog-black">
-        <div className=" pt-52 max-w-4xl px-4 mx-auto ">
+        <div className=" pt-52 max-w-3xl px-4 mx-auto ">
           {children}
 
           <div className="h-24"></div>

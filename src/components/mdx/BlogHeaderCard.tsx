@@ -20,7 +20,7 @@ const BlogHeaderCard: React.FC<BlogHeaderCardProps> = ({
     <motion.header className="mb-14 pb-4 flex justify-center lg:justify-start border-gray-200 dark:border-zinc-700">
       <div className=" items-center mb-3">
         <motion.h1
-          className="text-4xl    font-semibold sm:text-5xl   tracking-tight leading-tight text-gray-800 dark:text-white"
+          className="font-semibold text-3xl md:text-4xl lg:text-5xl  tracking-tight leading-tight text-gray-800 dark:text-white"
           transition={{ duration: 0.1, ease: 'easeInOut', delay: 0.2 }}
         >
           {title}

@@ -11,19 +11,19 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>
 const components = {
   h1: (props: ComponentPropsWithoutRef<'h1'>) => (
     <h1
-      className="font-semibold text-4xl md:text-5xl lg:text-6xl tracking-tight leading-tight pb-4 md:pt-10 mb-6 md:mb-8 text-white"
+      className="font-semibold text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight pb-4 md:pt-10 mb-6 md:mb-8 text-white"
       {...props}
     />
   ),
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
     <h2
-      className="text-zinc-100 text-3xl font-semibold mt-16 mb-6 leading-tight tracking-normal"
+      className="text-zinc-100 text-2xl font-semibold mt-16 mb-6 leading-tight tracking-normal"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
     <h3
-      className="text-zinc-200 text-2xl font-semibold mt-12 mb-4 leading-snug tracking-normal"
+      className="text-zinc-200 text-1xl font-semibold mt-12 mb-4 leading-snug tracking-normal"
       {...props}
     />
   ),
@@ -31,10 +31,7 @@ const components = {
     <h4 className="text-zinc-300 text-xl font-medium mt-8 mb-4" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p
-      className="text-zinc-300 leading-7 mb-6 md:mb-8 text-lg max-w-prose"
-      {...props}
-    />
+    <p className="text-zinc-300 leading-7 mb-6 md:mb-8 text-base " {...props} />
   ),
   ol: (props: ListProps) => (
     <ol

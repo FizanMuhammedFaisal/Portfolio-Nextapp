@@ -27,7 +27,7 @@ export default function Home() {
   // baseColor2={[0.0, 0.5, 0.2]}
   return (
     <Transition>
-      <div className="relative " onMouseMove={handleMouseMove}>
+      <div className="relative  " onMouseMove={handleMouseMove}>
         <WebGLBackground
           baseColor1={[0.0, 0.0, 0.0]}
           baseColor2={[0.0, 0.4, 0.35]}
@@ -72,7 +72,7 @@ export default function Home() {
                         delay: index * 0.3,
                         repeatType: 'reverse',
                       }}
-                      className={`inline-block text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold  font-bebas  mr-2 sm:mr-4 bg-clip-text text-transparent`}
+                      className={` inline-block text-5xl sm:text-6xl md:text-8xl lg:text-[6rem] xl:text-[6rem] font-extrabold  font-bebas  mr-2 sm:mr-4 bg-clip-text text-transparent`}
                       style={{
                         lineHeight: '0.9',
                       }}
@@ -90,7 +90,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 1.6 }}
             >
               <motion.p
-                className="text-white text-lg sm:text-xl font-light tracking-widest text-center"
+                className="text-white text-sm sm:text-lg font-light tracking-widest text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}

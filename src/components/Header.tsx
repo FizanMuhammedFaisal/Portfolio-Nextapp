@@ -67,10 +67,10 @@ function Header() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="flex justify-center top-0 fixed left-0 right-0 z-50 pointer-events-none rounded-md overflow-hidden"
     >
-      <div className="flex justify-center  min-w-11 mt-5 md:mx-0 mx-2 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
+      <div className="flex justify-center  min-w-11 mt-5 md:mx-0 mx-5 backdrop-blur-md rounded-md text-white relative pointer-events-auto">
         <div className="absolute inset-0 z-50  bg-black/30 border-white/10 border rounded-md pointer-events-none"></div>
 
-        <motion.ul className="flex px-4 py-2  relative z-10">
+        <motion.ul className="flex px-2 py-[.5rem]  relative z-10">
           {links.map((link, i) => {
             const isSelected = link.href === baseRoute
             const isHovered = selectedIndex === i
@@ -81,7 +81,7 @@ function Header() {
                   <Link
                     href={link.href}
                     className={clsx(
-                      'block relative py-1 md:px-4 px-2 rounded-md '
+                      'block relative py-[.18rem] sm:px-2 md:px-3 px-2 rounded-md text-xs sm:text-sm'
                     )}
                     onMouseEnter={() => setSelectedIndex(i)}
                     onMouseLeave={() => setSelectedIndex(null)}
@@ -100,7 +100,7 @@ function Header() {
                         <motion.div
                           layoutId="hovered"
                           className={clsx(
-                            'absolute inset-0 bg-white/15 rounded-md'
+                            'absolute inset-0 bg-white/15 rounded-[0.3rem]'
                           )}
                           initial={false}
                           transition={{

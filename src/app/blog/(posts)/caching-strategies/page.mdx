@@ -35,7 +35,13 @@ To prevent the data from being state we can use TTL(Time To Live) which will exp
 
 {' '}
 
-<Image src={readthrough} alt="Read Through Example" />
+<Image
+  src={readthrough}
+  alt="Read Through Example"
+  enableLightbox={true}
+  enableZoom={true}
+  enableFullscreen={true}
+/>
 
 Read Through is best suited in places where data is read frequently but changes rarely
 and you are not highly concerned about data consistency

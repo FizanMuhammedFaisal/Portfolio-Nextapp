@@ -72,7 +72,7 @@ export default function Home() {
           style={{ opacity: headerOpacity, y: headerY }}
           className="py-6 mb-6"
         >
-          <div className="max-w-3xl mx-auto px-4">
+          <div className="max-w-2xl mx-auto px-4">
             <motion.div
               className="backdrop-blur-xl bg-black/30 rounded-xl p-6 shadow-xl border border-white/10 hover:border-white/15 transition-all duration-500"
               initial={{ opacity: 0, y: 5 }}
@@ -84,7 +84,7 @@ export default function Home() {
               }}
             >
               <motion.h1
-                className="text-3xl font-light tracking-tight mb-3 text-white"
+                className="text-2xl font-light tracking-tight mb-3 text-white"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.1, duration: 0.3, type: 'spring' }}
@@ -92,7 +92,7 @@ export default function Home() {
                 I'm a Developer, Optimist & Community Builder
               </motion.h1>
               <motion.p
-                className="text-base text-white/70 font-light"
+                className="text-sm text-white/70 font-light"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.2, duration: 0.3, type: 'spring' }}
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
         </motion.header>
 
-        <section className="max-w-3xl mx-auto px-4 pb-12">
+        <section className="max-w-2xl mx-auto px-4 pb-12">
           <motion.div
             className="backdrop-blur-xl bg-black/30 rounded-xl p-6 shadow-xl border border-white/10 relative overflow-hidden "
             initial={{
@@ -144,7 +144,7 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.4 }}
             >
               <span className="bg-white/10 w-1 h-5 mr-2 rounded-sm"></span>
-              <h2 className="text-xl font-light tracking-wide text-white">
+              <h2 className="text-lg font-light tracking-wide text-white">
                 Latest Writing
               </h2>
             </motion.div>
@@ -180,10 +180,10 @@ export default function Home() {
                     </motion.div>
 
                     <motion.h3
-                      className="text-lg font-light mb-2 text-white group-hover:text-white/90 transition-colors duration-300"
+                      className="text-sm font-light mb-2 text-white group-hover:text-white/90 transition-colors duration-300"
                       animate={
                         hoveredItem === index
-                          ? { scale: 0.99, x: 1 }
+                          ? { scale: 0.99, x: 2 }
                           : { x: 0, scale: 1 }
                       }
                       transition={{
@@ -194,9 +194,19 @@ export default function Home() {
                     >
                       {post.title}
                     </motion.h3>
-                    <p className="text-sm text-white/70 mb-3 line-clamp-2 font-light">
+                    <motion.p
+                      className="text-xs text-white/70 mb-3 line-clamp-2 font-light"
+                      animate={
+                        hoveredItem === index ? { x: 2 } : { x: 0, scale: 1 }
+                      }
+                      transition={{
+                        type: 'spring',
+                        stiffness: 200,
+                        damping: 17,
+                      }}
+                    >
                       {post.excerpt}
-                    </p>
+                    </motion.p>
                     <div className="flex flex-wrap items-center text-xs text-white/50 space-x-3">
                       <span className="flex items-center">
                         <Calendar className="w-3 h-3 mr-1 opacity-70" />
@@ -237,10 +247,10 @@ export default function Home() {
               >
                 <Link
                   href="/blog"
-                  className="inline-flex items-center px-5 py-2 rounded-lg bg-white/10 text-white hover:bg-white/15 transition-all duration-300 text-sm shadow-lg backdrop-blur-md border border-white/10 hover:border-white/20 relative overflow-hidden group"
+                  className="inline-flex items-center px-5 py-2 rounded-lg bg-black/10 text-white hover:bg-white/10 transition-all  text-xs shadow-lg backdrop-blur-md border border-white/10 hover:border-white/15 relative overflow-hidden group"
                 >
                   <motion.span
-                    className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100"
+                    className="absolute inset-0 bg-white/5 opacity-0  group-hover:opacity-100"
                     initial={{ x: '-100%' }}
                     whileHover={{ x: '100%' }}
                     transition={{ duration: 0.6 }}
@@ -252,7 +262,7 @@ export default function Home() {
                     whileHover={{ x: 5 }}
                     transition={{ type: 'spring', stiffness: 400 }}
                   >
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <ArrowRight className="w-3 h-3 ml-2" />
                   </motion.span>
                 </Link>
               </motion.div>
