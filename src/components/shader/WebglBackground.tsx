@@ -10,7 +10,9 @@ interface WebGLBackgroundProps {
   baseColor2?: [number, number, number]
   noiseScale?: number
   particleInfluence?: number
+  speed?: number
 }
+
 type MousePosition = {
   x: number
   y: number
@@ -24,6 +26,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
   baseColor2 = [0.0, 0.4, 0.1],
   noiseScale = 8.0,
   particleInfluence = 0.1,
+  speed = 1,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const animationFrameRef = useRef<number | null>(null)
@@ -101,7 +104,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     pathParams.current = {
       radiusX: maxRadius * (0.5 + Math.random() * 0.5),
       radiusY: maxRadius * (0.5 + Math.random() * 0.5),
-      speed: 0.0002 + Math.random() * 0.0001,
+      speed: speed * 0.0002 + Math.random() * 0.0001,
       noiseScale: 0.003,
       directionMultiplier: 1,
     }
@@ -115,7 +118,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         pathParams.current = {
           radiusX: maxRadius * (0.3 + Math.random() * 0.7),
           radiusY: maxRadius * (0.3 + Math.random() * 0.7),
-          speed: 0.00001 + Math.random() * 0.00001,
+          speed: 0.00001 * speed + Math.random() * 0.00001,
           noiseScale: 0.001 + Math.random() * 0.005,
           directionMultiplier: Math.random() > 0.5 ? 1 : -1,
         }
