@@ -8,7 +8,7 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode
 }) {
-  useLenis(true)
+  useLenis()
   return (
     <Transition>
       <div className="w-full h-full bg-blog-black">
