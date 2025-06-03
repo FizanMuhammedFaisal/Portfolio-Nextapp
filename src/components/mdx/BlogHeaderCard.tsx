@@ -2,6 +2,7 @@
 import React from 'react'
 import { Calendar, User } from 'lucide-react'
 import { motion } from 'motion/react'
+import Image from 'next/image'
 
 interface BlogHeaderCardProps {
   author: string
@@ -25,14 +26,21 @@ const BlogHeaderCard: React.FC<BlogHeaderCardProps> = ({
         >
           {title}
         </motion.h1>
-        <div className="text-sm mt-2 flex gap-5 text-gray-600 dark:text-gray-400">
-          <motion.div className="flex items-center space-x-2 mb-1">
-            <User className="w-4 h-4" />
+        <div className="mt-4 flex flex-wrap sm:flex-nowrap items-center gap-x-6 gap-y-2 text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
+          <motion.div className="flex items-center gap-2 whitespace-nowrap">
+            <Image
+              alt="profile"
+              src="/profile.png"
+              width={35}
+              height={35}
+              className="rounded-full "
+            />
             <span>{author}</span>
           </motion.div>
-          <motion.div className="flex items-center space-x-2">
+
+          <motion.div className="flex text-tiny sm:text-xs items-center gap-2 whitespace-nowrap">
             <Calendar className="w-4 h-4" />
-            <span className="font-mono text-xs">{date}</span>
+            <span className="font-mono ">{date}</span>
           </motion.div>
         </div>
       </div>
