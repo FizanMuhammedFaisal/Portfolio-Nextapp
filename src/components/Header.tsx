@@ -81,7 +81,7 @@ function Header() {
                   <Link
                     href={link.href}
                     className={clsx(
-                      'block relative py-[.18rem] sm:px-2 md:px-3 px-2 rounded-md text-xs sm:text-sm'
+                      'block relative py-[.18rem] sm:px-2 md:px-3 px-2 rounded-md text-[0.77rem] sm:text-sm'
                     )}
                     onMouseEnter={() => setSelectedIndex(i)}
                     onMouseLeave={() => setSelectedIndex(null)}

@@ -31,7 +31,7 @@ export default function Home() {
         <WebGLBackground
           baseColor1={[0.0, 0.0, 0.0]}
           baseColor2={[0.0, 0.4, 0.35]}
-          noiseScale={2.5}
+          noiseScale={3.5}
           mousePosition={mousePosition}
         >
           <div className="flex  flex-col min-h-screen justify-center items-center p-4 text-white">

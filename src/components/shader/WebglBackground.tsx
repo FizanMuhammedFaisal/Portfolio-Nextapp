@@ -292,10 +292,10 @@ void main() {
   
   st = flowField(st, u_autonomousPos, u_mouse, u_time, u_particleInfluence);
 
-  float f = noise(st * u_noiseScale + u_time * 0.1);
+  float f = noise(st * u_noiseScale + u_time * 0.2);
   f = noise(st + f);
-  f = abs(f - 0.1) * 2.0;
-  float finerNoise = noise(st * u_noiseScale * 2.0 + u_time * 0.2);
+  f = abs(f - 0.1) * 2.5;
+  float finerNoise = noise(st * u_noiseScale * 3.0 + u_time * 0.2);
   f += finerNoise * 0.1;
   vec3 color = mix(u_color1, u_color2, f);
   float highlight = smoothstep(0.3, 1.0, f);

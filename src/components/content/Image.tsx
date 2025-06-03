@@ -1,85 +1,85 @@
 'use client'
 import ImageNext, { StaticImageData } from 'next/image'
-import React, { useState } from 'react'
-import Lightbox from 'yet-another-react-lightbox'
-import 'yet-another-react-lightbox/styles.css'
-import NextJsImage from './NextjsImage'
-import Zoom from 'yet-another-react-lightbox/plugins/zoom'
-import Download from 'yet-another-react-lightbox/plugins/download'
+import React, { useEffect, useRef } from 'react'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
+import { getLenis } from '@/lib/lenis'
+
 interface ImageProps {
   src: StaticImageData // The dynamic image source URL
   alt: string // The alt text for the image
   className?: string
   blurDataURL?: string
+  galleryId?: string // Optional gallery ID for grouping multiple images
 }
 
-function Image({ src, alt, className, blurDataURL }: ImageProps) {
+function Image({
+  src,
+  alt,
+  className,
+  blurDataURL,
+  galleryId = 'default-gallery',
+}: ImageProps) {
   const placeholder = blurDataURL ? 'blur' : 'empty'
-  const [isOpen, setIsOpen] = useState(false)
-  const hanldeOpenLightbox = () => {
-    setIsOpen(true)
-  }
+  const lightboxRef = useRef<PhotoSwipeLightbox | null>(null)
+  const imageId = useRef(`image-${Math.random().toString(36).slice(2, 9)}`)
+
+  useEffect(() => {
+    lightboxRef.current = new PhotoSwipeLightbox({
+      gallery: `#${galleryId}`,
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+      bgOpacity: 0.9,
+      showHideAnimationType: 'zoom',
+      wheelToZoom: true,
+      trapFocus: true,
+      zoom: true,
+    })
+
+    lightboxRef.current.init()
+    lightboxRef.current.on('beforeOpen', () => {
+      const lenis = getLenis()
+      if (lenis) lenis.stop()
+    })
+
+    lightboxRef.current.on('close', () => {
+      const lenis = getLenis()
+      if (lenis) lenis.start()
+    })
+    return () => {
+      if (lightboxRef.current) {
+        lightboxRef.current.destroy()
+        lightboxRef.current = null
+
+        const lenis = getLenis()
+        if (lenis) lenis.start()
+      }
+    }
+  }, [galleryId])
 
   return (
     <div
       className={`w-full h-full flex justify-center items-center ${className ?? ''}`}
+      id={galleryId}
     >
-      <ImageNext
-        src={src}
-        alt={alt}
-        width={src.width}
-        height={src.height}
-        className={`rounded-lg shadow-lg ${className ?? ''}`}
-        placeholder={placeholder}
-        blurDataURL={blurDataURL}
-        onClick={hanldeOpenLightbox}
-      />
-      <Lightbox
-        open={isOpen}
-        close={() => setIsOpen(false)}
-        slides={[{ src: src.src, alt: alt }]}
-        plugins={[Zoom, Download]}
-        zoom={{
-          maxZoomPixelRatio: 3,
-          zoomInMultiplier: 2,
-          doubleTapDelay: 300,
-          doubleClickDelay: 300,
-          doubleClickMaxStops: 2,
-          keyboardMoveDistance: 50,
-          wheelZoomDistanceFactor: 100,
-          pinchZoomDistanceFactor: 100,
-          scrollToZoom: true,
-        }}
-        carousel={{
-          finite: true,
-          preload: 0,
-        }}
-        controller={{
-          closeOnPullDown: true,
-          closeOnBackdropClick: true,
-        }}
-        toolbar={{
-          buttons: ['close'],
-        }}
-        render={{
-          buttonPrev: () => null,
-          buttonNext: () => null,
-          slide: NextJsImage,
-        }}
-        animation={{
-          fade: 500,
-          swipe: 300,
-        }}
-        styles={{
-          container: {
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            backdropFilter: 'blur(8px)',
-          },
-          slide: {
-            filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))',
-          },
-        }}
-      />
+      <a
+        href={src.src}
+        data-pswp-width={src.width}
+        data-pswp-height={src.height}
+        target="_blank"
+        rel="noreferrer"
+        key={imageId.current}
+      >
+        <ImageNext
+          src={src}
+          alt={alt}
+          width={src.width}
+          height={src.height}
+          className={`rounded-lg shadow-lg cursor-pointer ${className ?? ''}`}
+          placeholder={placeholder}
+          blurDataURL={blurDataURL}
+        />
+      </a>
     </div>
   )
 }

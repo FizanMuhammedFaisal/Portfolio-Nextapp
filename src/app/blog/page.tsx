@@ -43,17 +43,7 @@ export default function Home() {
 
   const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.0])
   const [baseColor2] = useState<[number, number, number]>([0.0, 0.45, 0.38])
-  const [noiseScale] = useState(1.0)
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
+  const [noiseScale] = useState(1.5)
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -125,19 +115,6 @@ export default function Home() {
             }}
           >
             <motion.div
-              className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.15, 0.1],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                repeatType: 'reverse',
-              }}
-            />
-
-            <motion.div
               className="flex items-center mb-5 border-b pb-3 border-white/15"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -149,12 +126,7 @@ export default function Home() {
               </h2>
             </motion.div>
 
-            <motion.ul
-              className="space-y-4"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.ul className="space-y-4">
               {posts.map((post, index) => (
                 <motion.li
                   key={index}
@@ -164,23 +136,10 @@ export default function Home() {
                 >
                   <Link
                     href={post.slug}
-                    className="block p-4 rounded-lg transition-all duration-300 hover:bg-white/5 border hover:border-white/15 border-transparent group backdrop-blur-md relative"
+                    className="block p-4 rounded-lg transition-all hover:bg-white/5 border hover:border-white/15 border-transparent group backdrop-blur-md relative"
                   >
-                    {/* Scan line effect */}
-                    <motion.div
-                      className="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-10 pointer-events-none"
-                      initial={false}
-                      animate={
-                        hoveredItem === index
-                          ? { opacity: 0.05 }
-                          : { opacity: 0 }
-                      }
-                    >
-                      <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,_rgba(255,255,255,0.05)_50%)] bg-[length:100%_4px]"></div>
-                    </motion.div>
-
                     <motion.h3
-                      className="text-sm font-light mb-2 text-white group-hover:text-white/90 transition-colors duration-300"
+                      className="text-sm font-light mb-2 text-white group-hover:text-white/90 transition-colors"
                       animate={
                         hoveredItem === index
                           ? { scale: 0.99, x: 2 }
@@ -207,7 +166,7 @@ export default function Home() {
                     >
                       {post.excerpt}
                     </motion.p>
-                    <div className="flex flex-wrap items-center text-xs text-white/50 space-x-3">
+                    <div className="flex flex-wrap items-center text-tiny text-white/50 space-x-3">
                       <span className="flex items-center">
                         <Calendar className="w-3 h-3 mr-1 opacity-70" />
                         {post.date}
@@ -220,14 +179,6 @@ export default function Home() {
                         <User className="w-3 h-3 mr-1 opacity-70" />
                         {post.author}
                       </span>
-                      <motion.span
-                        className="ml-auto text-xs font-light flex items-center text-white/80 group-hover:text-white transition-colors duration-300"
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 5 }}
-                        transition={{ type: 'spring', stiffness: 400 }}
-                      >
-                        Read more <ArrowRight className="w-3 h-3 ml-1" />
-                      </motion.span>
                     </div>
                   </Link>
                 </motion.li>
@@ -236,7 +187,7 @@ export default function Home() {
 
             <motion.div
               className="mt-6 text-center flex justify-center"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 1, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.3 }}
             >
@@ -247,7 +198,7 @@ export default function Home() {
               >
                 <Link
                   href="/blog"
-                  className="inline-flex items-center px-5 py-2 rounded-lg bg-black/10 text-white hover:bg-white/10 transition-all  text-xs shadow-lg backdrop-blur-md border border-white/10 hover:border-white/15 relative overflow-hidden group"
+                  className="inline-flex items-center px-5 py-2 rounded-lg bg-black/5 text-white hover:bg-white/10 transition-all  text-xs shadow-lg backdrop-blur-md border border-white/10 hover:border-white/15 relative overflow-hidden group"
                 >
                   <motion.span
                     className="absolute inset-0 bg-white/5 opacity-0  group-hover:opacity-100"
