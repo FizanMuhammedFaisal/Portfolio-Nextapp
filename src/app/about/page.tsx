@@ -6,6 +6,7 @@ import Transition from '@/components/layout/Transition'
 import useLenis from '@/hooks/useLenis'
 import Image from 'next/image'
 import WebGLBackground from '@/components/shader/WebglBackground'
+import { Metadata } from 'next'
 
 function Page() {
   useLenis()
