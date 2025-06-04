@@ -76,7 +76,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
           const dx = mousePosition.x - prev.x
           const dy = mousePosition.y - prev.y
 
-          const easing = 0.08 // Slightly faster for mouse tracking
+          const easing = 0.08 * speed // Apply speed to mouse smoothing
           const easedX = prev.x + dx * easeOutQuad(easing)
           const easedY = prev.y + dy * easeOutQuad(easing)
 
@@ -91,7 +91,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         }
       }
     }
-  }, [mousePosition])
+  }, [mousePosition, speed])
 
   // Handle autonomous movement (continues regardless of mouse)
   useEffect(() => {
@@ -104,8 +104,8 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
     pathParams.current = {
       radiusX: maxRadius * (0.5 + Math.random() * 0.5),
       radiusY: maxRadius * (0.5 + Math.random() * 0.5),
-      speed: speed * 0.0002 + Math.random() * 0.0001,
-      noiseScale: 0.003,
+      speed: speed * 0.0002 + Math.random() * 0.0001 * speed, // Apply speed here too
+      noiseScale: 0.003 * speed, // Apply speed to noise scale
       directionMultiplier: 1,
     }
 
@@ -113,13 +113,14 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
       const elapsedTime = Date.now() - startTime.current
       const timeSinceDirectionChange = Date.now() - lastDirectionChange.current
 
-      // Occasionally change direction and path parameters
-      if (timeSinceDirectionChange > 10000 + Math.random() * 5000) {
+      // Direction change frequency affected by speed
+      const directionChangeInterval = (10000 + Math.random() * 5000) / speed
+      if (timeSinceDirectionChange > directionChangeInterval) {
         pathParams.current = {
           radiusX: maxRadius * (0.3 + Math.random() * 0.7),
           radiusY: maxRadius * (0.3 + Math.random() * 0.7),
-          speed: 0.00001 * speed + Math.random() * 0.00001,
-          noiseScale: 0.001 + Math.random() * 0.005,
+          speed: 0.00001 * speed + Math.random() * 0.00001 * speed,
+          noiseScale: (0.001 + Math.random() * 0.005) * speed,
           directionMultiplier: Math.random() > 0.5 ? 1 : -1,
         }
         lastDirectionChange.current = Date.now()
@@ -144,7 +145,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         ) *
           pathParams.current.radiusY
 
-      // Add noise layer
+      // Add noise layer with speed influence
       const noiseX =
         Math.sin(elapsedTime * pathParams.current.noiseScale * 1.7) *
         maxRadius *
@@ -154,13 +155,15 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         maxRadius *
         0.15
 
-      // Occasional slowdown
-      const slowdownFactor = Math.sin(elapsedTime * 0.0003) > 0.7 ? 0.2 : 1
+      // Occasional slowdown, but still affected by overall speed
+      const slowdownFactor =
+        Math.sin(elapsedTime * 0.0003 * speed) > 0.7 ? 0.2 : 1
 
-      // Update autonomous position
+      // Update autonomous position with speed multiplier
+      const positionEasing = 0.02 * speed * slowdownFactor
       setAutonomousPosition((prev) => ({
-        x: prev.x + (baseX + noiseX - prev.x) * 0.02 * slowdownFactor,
-        y: prev.y + (baseY + noiseY - prev.y) * 0.02 * slowdownFactor,
+        x: prev.x + (baseX + noiseX - prev.x) * positionEasing,
+        y: prev.y + (baseY + noiseY - prev.y) * positionEasing,
       }))
 
       animationFrameId.current = requestAnimationFrame(autonomousMovement)
@@ -173,7 +176,7 @@ const WebGLBackground: React.FC<WebGLBackgroundProps> = ({
         cancelAnimationFrame(animationFrameId.current)
       }
     }
-  }, [])
+  }, [speed])
 
   const cleanup = useCallback(() => {
     if (animationFrameRef.current) {
@@ -242,6 +245,7 @@ uniform vec3 u_color1;
 uniform vec3 u_color2;
 uniform float u_noiseScale;
 uniform float u_particleInfluence;
+uniform float u_speed;
 
 float random(vec2 st) {
   return fract(sin(dot(st.xy, vec2(82.9898, 78.233))) * 3758.5453123);
@@ -258,25 +262,25 @@ float noise(vec2 st) {
   return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
 }
 
-vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influence) {
+vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influence, float speed) {
   // Primary flow based on autonomous movement
   vec2 autonomousNorm = autonomousPos / u_resolution.xy;
   float distToAutonomous = length(st - autonomousNorm);
-  float autonomousRipple = sin(distToAutonomous * 25.0 - time * 3.0);
+  float autonomousRipple = sin(distToAutonomous * 25.0 - time * 3.0 * speed);
   vec2 autonomousDirection = normalize(autonomousNorm - st);
   float autonomousInfluence = smoothstep(0.2, 0.8, distToAutonomous);
   
   // Secondary mouse influence (much weaker)
   vec2 mouseNorm = mouse / u_resolution.xy;
   float distToMouse = length(st - mouseNorm);
-  float mouseRipple = sin(distToMouse * 12.0 - time * 6.0);
+  float mouseRipple = sin(distToMouse * 12.0 - time * 6.0 * speed);
   vec2 mouseDirection = normalize(mouseNorm - st);
   float mouseInfluence = smoothstep(0.1, 0.6, distToMouse) * influence * 0.3; // Much weaker
   
-  // Base noise movement
+  // Base noise movement with speed influence
   vec2 noiseOffset = vec2(
-    noise(st * 12.0 + time * 0.5),
-    noise(st * 12.0 + time * 0.5 + 100.0)
+    noise(st * 12.0 + time * 0.5 * speed),
+    noise(st * 12.0 + time * 0.5 * speed + 100.0)
   ) * 0.08;
   
   // Combine influences with autonomous being dominant
@@ -293,12 +297,12 @@ vec2 flowField(vec2 st, vec2 autonomousPos, vec2 mouse, float time, float influe
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
   
-  st = flowField(st, u_autonomousPos, u_mouse, u_time, u_particleInfluence);
+  st = flowField(st, u_autonomousPos, u_mouse, u_time, u_particleInfluence, u_speed);
 
-  float f = noise(st * u_noiseScale + u_time * 0.2);
+  float f = noise(st * u_noiseScale + u_time * 0.2 * u_speed);
   f = noise(st + f);
   f = abs(f - 0.1) * 2.5;
-  float finerNoise = noise(st * u_noiseScale * 3.0 + u_time * 0.2);
+  float finerNoise = noise(st * u_noiseScale * 3.0 + u_time * 0.2 * u_speed);
   f += finerNoise * 0.1;
   vec3 color = mix(u_color1, u_color2, f);
   float highlight = smoothstep(0.3, 1.0, f);
@@ -368,13 +372,14 @@ void main() {
       program,
       'u_particleInfluence'
     )
+    const speedLocation = gl.getUniformLocation(program, 'u_speed')
 
     gl.useProgram(program)
 
     const render = (time: number) => {
       if (!glRef.current || !programRef.current || !isVisible) return
 
-      time *= 0.0005
+      time *= 0.0005 * speed // Apply speed to overall time multiplier
 
       gl.clearColor(0, 0, 0, 1)
       gl.clear(gl.COLOR_BUFFER_BIT)
@@ -396,6 +401,7 @@ void main() {
       gl.uniform3f(color2Location, ...baseColor2)
       gl.uniform1f(noiseScaleLocation, noiseScale)
       gl.uniform1f(particleInfluenceLocation, particleInfluence)
+      gl.uniform1f(speedLocation, speed) // Pass speed to shader
 
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
@@ -417,6 +423,7 @@ void main() {
     baseColor2,
     noiseScale,
     particleInfluence,
+    speed,
   ])
 
   return (

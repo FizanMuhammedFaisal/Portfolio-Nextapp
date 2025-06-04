@@ -9,15 +9,15 @@ export default function LearningJourney() {
   const projects = [
     {
       title: 'Basic Animations',
-      path: 'framermotion/lesson1',
+      path: 'motion/lesson1',
     },
     {
       title: 'Keyframe Animation',
-      path: 'framermotion/lesson2',
+      path: 'motion/lesson2',
     },
     {
       title: 'Exit Animations',
-      path: 'framermotion/lesson3',
+      path: 'motion/lesson3',
     },
   ]
 
@@ -27,7 +27,7 @@ export default function LearningJourney() {
         <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-[#e8d94c] to-yellow-300  mb-8">
           Learning Motion
         </h1>
-        <p className="text-xl text-center text-gray-300 mb-12">
+        <p className="text-base text-center text-gray-300 mb-12">
           Explore the animations I created while learning Framer Motion.
         </p>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12 items-stretch">

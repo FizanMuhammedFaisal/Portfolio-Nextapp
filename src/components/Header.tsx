@@ -26,7 +26,7 @@ const links: NavLink[] = [
   { href: '/', label: 'Home', icon: 'Home' },
   { href: '/about', label: 'About', icon: 'User' },
   { href: '/projects', label: 'Projects', icon: 'Code2' },
-  { href: '/contact', label: 'Contact', icon: 'Mail' },
+  { href: '/learnings', label: 'Learn', icon: 'Code2' },
   { href: '/blog', label: 'Blogs', icon: 'Book' },
 ]
 

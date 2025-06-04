@@ -8,21 +8,12 @@ import useLenis from '@/hooks/useLenis'
 
 export default function Home() {
   useLenis()
-  const headerRef = useRef(null)
-  const isHeaderInView = useInView(headerRef, { once: true })
-
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
-
-  const { scrollY } = useScroll()
-  const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.8])
-  const headerY = useTransform(scrollY, [0, 100], [0, -20])
 
   const posts = [
     {
       title: 'Caching Strategies',
       slug: '/blog/caching-strategies',
-      excerpt:
-        'Discover techniques for creating sleek, professional UI components for modern web applications.',
+      excerpt: 'A brief overview on Different Caching Strategies.',
       date: 'April 22, 2023',
       readTime: '7 min read',
       author: 'Fizan',
@@ -40,10 +31,19 @@ export default function Home() {
   // ;[0.0, 0.0, 0.23]
   // [0.00, 0.55, 0.00]
   // Noise Scale: 0.5
-
-  const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.0])
+  // ;[0.0, 0.0, 0.23]
+  // [0.00, 0.55, 0.00]
+  const [baseColor1] = useState<[number, number, number]>([0.0, 0.0, 0.06])
   const [baseColor2] = useState<[number, number, number]>([0.0, 0.45, 0.38])
   const [noiseScale] = useState(1.5)
+  const headerRef = useRef(null)
+  const isHeaderInView = useInView(headerRef, { once: true })
+
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
+
+  const { scrollY } = useScroll()
+  const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.8])
+  const headerY = useTransform(scrollY, [0, 100], [0, -20])
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -73,22 +73,24 @@ export default function Home() {
                 transition: { duration: 0.3 },
               }}
             >
-              <motion.h1
-                className="text-2xl font-light tracking-tight mb-3 text-white"
-                initial={{ opacity: 0, y: 10 }}
-                animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.1, duration: 0.3, type: 'spring' }}
-              >
-                I'm a Developer, Optimist & Community Builder
-              </motion.h1>
+              <div className="flex justify-between">
+                <motion.h1
+                  className="text-2xl font-light tracking-tight mb-3 text-white"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.1, duration: 0.3, type: 'spring' }}
+                >
+                  Blogs
+                </motion.h1>
+              </div>
               <motion.p
-                className="text-sm text-white/70 font-light"
+                className="text-sm text-white/70 font-light  "
                 initial={{ opacity: 0, y: 10 }}
                 animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.2, duration: 0.3, type: 'spring' }}
               >
-                Welcome to my digital garden where I share my thoughts,
-                projects, and experiences.
+                Welcome to my Blog where I share my thoughts, projects, and
+                experiences.
               </motion.p>
             </motion.div>
           </div>
