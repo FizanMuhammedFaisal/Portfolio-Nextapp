@@ -10,7 +10,7 @@ const raleway = Raleway({
 })
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'], // Add weights as per your requirements
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {

@@ -6,7 +6,7 @@ interface TransitionProps {
   variants?: Variants
 }
 
-function Transition({ children, variants }: TransitionProps) {
+export default function Transition({ children, variants }: TransitionProps) {
   const defaultVariants: Variants = {
     initial: { opacity: 0 },
     enter: { opacity: 1, transition: { duration: 0.6 } },
@@ -27,5 +27,3 @@ function Transition({ children, variants }: TransitionProps) {
     </div>
   )
 }
-
-export default Transition

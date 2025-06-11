@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useCallback, useState } from 'react'
-
+import { motion } from 'motion/react'
 interface WebGLBackgroundProps {
   children?: React.ReactNode
   mousePosition?: { x: number; y: number }
@@ -428,11 +428,15 @@ void main() {
 
   return (
     <div className="relative w-full h-full">
-      <canvas
+      <motion.canvas
         ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full"
+        className="absolute top-0 left-0 w-full h-full z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, ease: 'easeInOut' }}
         style={{ visibility: isVisible ? 'visible' : 'hidden' }}
       />
+
       <div className="relative z-10">{children}</div>
     </div>
   )

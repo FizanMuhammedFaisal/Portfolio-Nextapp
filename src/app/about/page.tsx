@@ -1,16 +1,10 @@
-'use client'
-
-import { motion } from 'motion/react'
 import { Github, Mail, Twitter } from 'lucide-react'
-import Transition from '@/components/layout/Transition'
-import useLenis from '@/hooks/useLenis'
 import Image from 'next/image'
 import WebGLBackground from '@/components/shader/WebglBackground'
-import { Metadata } from 'next'
+import Transition from '@/components/layout/Transition'
+import { MotionA, MotionDiv } from '@/components/clientWrappers/MotionElements'
 
 function Page() {
-  useLenis()
-
   return (
     <Transition>
       {/* WebGL Background - Top 30% */}
@@ -21,14 +15,14 @@ function Page() {
         speed={0.5}
       >
         <div className="h-[15vh] flex items-center justify-center">
-          <motion.div
+          <MotionDiv
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl font-bold mt-38">About Me</h1>
-          </motion.div>
+          </MotionDiv>
         </div>
         <div
           className="h-20 flex items-center justify-center overflow-hidden"
@@ -42,7 +36,7 @@ function Page() {
       <div className="relative min-h-screen bg-black text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 max-w-6xl">
           <div className="flex flex-col items-center space-y-8 lg:space-y-0 lg:flex-row lg:items-start lg:space-x-16">
-            <motion.div
+            <MotionDiv
               className="w-full max-w-sm lg:max-w-lg lg:w-2/5 order-1 lg:order-1 flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -57,10 +51,10 @@ function Page() {
                   className="  object-cover rounded-full"
                 />
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* Right Column - Content */}
-            <motion.div
+            <MotionDiv
               className="w-full lg:w-3/5 order-2 lg:order-2 text-center lg:text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,7 +88,7 @@ function Page() {
 
               {/* Social Links */}
               <div className="flex gap-4 mt-8">
-                <motion.a
+                <MotionA
                   href="https://github.com/fizanmuhammedfaisal"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,16 +97,16 @@ function Page() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Github size={20} />
-                </motion.a>
-                <motion.a
+                </MotionA>
+                <MotionA
                   href="fizanmuhammedfaisal.k@gmail.com"
                   className="p-2  border border-gray-800 hover:border-greenP rounded-md transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Mail size={20} />
-                </motion.a>
-                <motion.a
+                </MotionA>
+                <MotionA
                   href="https://x.com/fizan_faisal"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -121,9 +115,9 @@ function Page() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Twitter size={20} />
-                </motion.a>
+                </MotionA>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
       </div>
