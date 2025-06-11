@@ -3,10 +3,12 @@ import Image from 'next/image'
 import WebGLBackground from '@/components/shader/WebglBackground'
 import Transition from '@/components/layout/Transition'
 import { MotionA, MotionDiv } from '@/components/clientWrappers/MotionElements'
+import LenisEnhancer from '@/components/lenisComponent'
 
 function Page() {
   return (
     <Transition>
+      <LenisEnhancer />
       {/* WebGL Background - Top 30% */}
       <WebGLBackground
         baseColor1={[0.0, 0.0, 0.0]}
