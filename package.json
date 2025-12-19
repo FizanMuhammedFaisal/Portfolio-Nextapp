@@ -27,7 +27,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "motion": "^12.16.0",
-    "next": "^15.3.1",
+    "next": "15.3.8",
     "photoswipe": "^5.4.4",
     "postcss": "^8.5.3",
     "preact-render-to-string": "^6.5.12",
