@@ -18,15 +18,15 @@ export default function Home() {
       readTime: '7 min read',
       author: 'Fizan',
     },
-    {
-      title: 'Getting Started with WebGL in Next.js',
-      slug: '/blog/first',
-      excerpt:
-        'Learn how to implement stunning WebGL backgrounds in your Next.js applications.',
-      date: 'May 8, 2023',
-      readTime: '5 min read',
-      author: 'Fizan',
-    },
+    // {
+    //   title: 'Getting Started with WebGL in Next.js',
+    //   slug: '/blog/first',
+    //   excerpt:
+    //     'Learn how to implement stunning WebGL backgrounds in your Next.js applications.',
+    //   date: 'May 8, 2023',
+    //   readTime: '5 min read',
+    //   author: 'Fizan',
+    // },
   ]
   // ;[0.0, 0.0, 0.23]
   // [0.00, 0.55, 0.00]
