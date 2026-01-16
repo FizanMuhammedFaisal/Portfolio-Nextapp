@@ -133,7 +133,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
               >
-                Web Developer & Designer
+                Software Engineer
               </motion.p>
             </motion.div>
           </div>
