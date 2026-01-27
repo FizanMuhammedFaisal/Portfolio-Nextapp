@@ -7,6 +7,9 @@ import Transition from '@/components/layout/Transition'
 import WebGLBackground from '@/components/shader/WebglBackground'
 import useLenis from '@/hooks/useLenis'
 
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const { scrollYProgress } = useScroll()
@@ -122,31 +125,33 @@ export default function Home() {
               </motion.div>
             </motion.div>
             <motion.div
-              className="mb-16 sm:mb-24 md:mb-32"
+              className="flex flex-col items-center gap-6 mt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.6 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
             >
-              <motion.p
-                className="text-white text-sm sm:text-lg font-light tracking-widest text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-              >
+              <h2 className="text-sm sm:text-xl font-light tracking-[0.4em] text-white/70 uppercase">
                 Software Engineer
-              </motion.p>
+              </h2>
+
+              <Link
+                href="/blog"
+                className="group relative px-6 py-2 bg-white/5 backdrop-blur-sm border border-white/10 text-white/90 text-xs font-medium tracking-[0.2em] rounded-full hover:bg-white/10 hover:border-white/30 transition-all duration-300 flex items-center gap-3"
+              >
+                <span className="relative z-10">READ MY THOUGHTS</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <Link
+                href="/about"
+                className="text-white/50 hover:text-white/80 text-xs tracking-wider transition-colors"
+              >
+                About
+              </Link>
             </motion.div>
           </div>
-          <div
-            className="h-96 flex items-center justify-center overflow-hidden"
-            style={{
-              background:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,1) 100%)',
-            }}
-          ></div>
         </WebGLBackground>
       </div>
-      <div className="min-h-screen bg-black"></div>
     </Transition>
   )
 }

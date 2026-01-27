@@ -6,12 +6,6 @@ import { MotionA, MotionDiv } from '@/components/clientWrappers/MotionElements'
 import LenisEnhancer from '@/components/lenisComponent'
 
 function Page() {
-  const experiences = [
-    { area: 'Full-Stack', desc: 'End-to-end applications' },
-    { area: 'System Design', desc: 'Scalable architecture' },
-    { area: 'Low-Level', desc: 'Performance & internals' },
-  ]
-
   const links = [
     {
       href: 'https://github.com/fizanmuhammedfaisal',
@@ -38,171 +32,114 @@ function Page() {
     <Transition>
       <LenisEnhancer />
 
-      {/* Hero with Profile */}
       <WebGLBackground
         baseColor1={[0.0, 0.0, 0.0]}
         baseColor2={[0.0, 0.25, 0.28]}
         noiseScale={0.2}
         speed={0.5}
       >
-        <div className="min-h-[40vh] flex items-center">
-          <div className="w-full max-w-6xl mx-auto px-6 lg:px-12 py-16">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-              <MotionDiv
-                className="lg:col-span-3"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-2xl blur-sm" />
-                  <Image
-                    src="/profile.png"
-                    alt="Fizan Muhammed Faisal"
-                    width={200}
-                    height={200}
-                    className="relative rounded-2xl object-cover w-full max-w-[200px]"
-                  />
-                </div>
-              </MotionDiv>
+        {/* Black gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black pointer-events-none" />
 
-              <MotionDiv
-                className="lg:col-span-9"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <h1 className="text-3xl lg:text-4xl font-semibold mb-4">
-                  Fizan Muhammed Faisal
-                </h1>
-                <p className="text-emerald-400 font-mono text-sm tracking-wider mb-6">
-                  Software Engineer
-                </p>
-                <div className="text-lg text-gray-400 leading-relaxed max-w-2xl space-y-4">
-                  <p>
-                    I build software and enjoy understanding how things work. My
-                    focus is on creating{' '}
+        <div className="relative min-h-screen flex items-center justify-center">
+          <div className="w-full max-w-3xl mx-auto px-6 py-20">
+            <MotionDiv
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="space-y-10"
+            >
+              {/* Profile Section */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-6">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/30 to-transparent rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Image
+                      src="/profile.png"
+                      alt="Profile picture"
+                      width={100}
+                      height={100}
+                      className="relative rounded-2xl object-cover ring-1 ring-white/10"
+                    />
+                  </div>
+                  <div>
+                    <h1 className="text-4xl font-light text-white tracking-tight">
+                      Fizan M Faisal
+                    </h1>
+                    <p className="text-emerald-400/70 text-sm font-mono tracking-wide mt-2">
+                      Software Engineer
+                    </p>
+                  </div>
+                </div>
+
+                <div className="max-w-xl">
+                  <p className="text-xl text-gray-300 leading-relaxed font-light">
+                    I build software and enjoy understanding how things work.{' '}
                     <span className="text-white">
-                      clean, well-architected systems
+                      Clean architecture and thoughtful design.
                     </span>
-                    .
                   </p>
                 </div>
-              </MotionDiv>
-            </div>
-          </div>
-        </div>
-        <div
-          className="h-20"
-          style={{
-            background:
-              'linear-gradient(to bottom, transparent 0%, black 100%)',
-          }}
-        />
-      </WebGLBackground>
+              </div>
 
-      {/* Main Content */}
-      <div className="bg-black text-white">
-        <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          {/* What I Do - Compact */}
-          <section className="py-12">
-            <MotionDiv
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-wrap gap-6"
-            >
-              {experiences.map((exp, i) => (
-                <MotionDiv
-                  key={exp.area}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="group"
-                >
-                  <span className="text-white font-medium">{exp.area}</span>
-                  <span className="text-gray-600 mx-2">—</span>
-                  <span className="text-gray-500">{exp.desc}</span>
-                </MotionDiv>
-              ))}
-            </MotionDiv>
-          </section>
-
-          {/* Divider */}
-          <div className="border-t border-gray-900" />
-
-          {/* Connect */}
-          <section className="py-20 lg:py-32">
-            <div className="grid lg:grid-cols-12 gap-12">
-              <MotionDiv
-                className="lg:col-span-5"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <p className="text-emerald-400 font-mono text-sm tracking-wider mb-4">
-                  Get in touch
+              {/* Focus Areas */}
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-4 font-medium">
+                  Focus Areas
                 </p>
-                <h2 className="text-3xl lg:text-4xl font-semibold mb-6">
-                  Let&apos;s connect
-                </h2>
-                <p className="text-gray-500 text-lg">
-                  Always open to interesting conversations and new
-                  opportunities.
-                </p>
-              </MotionDiv>
-
-              <MotionDiv
-                className="lg:col-span-7 lg:col-start-7"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <div className="space-y-0">
-                  {links.map((link) => (
-                    <MotionA
-                      key={link.label}
-                      href={link.href}
-                      target={
-                        link.href.startsWith('mailto') ? undefined : '_blank'
-                      }
-                      rel={
-                        link.href.startsWith('mailto')
-                          ? undefined
-                          : 'noopener noreferrer'
-                      }
-                      className="group flex items-center justify-between py-5 border-b border-gray-900 first:border-t"
-                      whileHover={{ x: 8 }}
-                      transition={{ duration: 0.2 }}
+                <div className="flex flex-wrap gap-4">
+                  {[
+                    'Full-Stack Development',
+                    'System Design',
+                    'Performance Engineering',
+                  ].map((area) => (
+                    <span
+                      key={area}
+                      className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200"
                     >
-                      <div className="flex items-center gap-4">
-                        <link.icon
-                          size={20}
-                          className="text-gray-600 group-hover:text-emerald-400 transition-colors"
-                        />
-                        <span className="text-lg text-gray-300 group-hover:text-white transition-colors">
-                          {link.label}
-                        </span>
-                      </div>
-                      <ArrowUpRight
-                        size={18}
-                        className="text-gray-700 group-hover:text-emerald-400 transition-all group-hover:translate-x-1 group-hover:-translate-y-1"
-                      />
-                    </MotionA>
+                      {area}
+                    </span>
                   ))}
                 </div>
-              </MotionDiv>
-            </div>
-          </section>
-        </div>
+              </div>
 
-        {/* Footer space */}
-        <div className="h-24" />
-      </div>
+              {/* Connect - New Compact Design */}
+              <div className="border-t border-white/10 pt-6">
+                <h2 className="text-base text-white tracking-wide mb-4 font-medium">
+                  Let's Connect
+                </h2>
+                <div className="flex flex-wrap gap-6">
+                  {links.map((link) => {
+                    const isMailto = link.href.startsWith('mailto')
+
+                    return (
+                      <MotionA
+                        key={link.label}
+                        href={link.href}
+                        target={isMailto ? undefined : '_blank'}
+                        rel={isMailto ? undefined : 'noopener noreferrer'}
+                        className="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                        whileHover={{ x: 4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <link.icon
+                          size={18}
+                          className="text-gray-500 group-hover:text-emerald-400 transition-colors"
+                        />
+                        <span className="text-sm font-light">{link.label}</span>
+                        <ArrowUpRight
+                          size={14}
+                          className="text-gray-600 group-hover:text-emerald-400 transition-colors"
+                        />
+                      </MotionA>
+                    )
+                  })}
+                </div>
+              </div>
+            </MotionDiv>
+          </div>
+        </div>
+      </WebGLBackground>
     </Transition>
   )
 }

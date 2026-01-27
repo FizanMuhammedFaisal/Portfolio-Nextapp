@@ -4,21 +4,45 @@ import readthrough from './readthrough.webp'
 import writethrough from './writethrough.webp'
 
 export const metadata = {
-  title: 'Caching Strategies',
-  description: 'A brief overview on Different Caching Strategies.',
-  alternates: {
-    canonical: '/n/ai',
-  },
+  title: 'Caching Strategies | Fizan M Faisal',
+  description:
+    'A brief overview on Different Caching Strategies including Read Through and Write Through patterns.',
   author: 'Fizan',
   date: 'May 12, 2025',
+  openGraph: {
+    title: 'Caching Strategies',
+    description:
+      'A brief overview on Different Caching Strategies including Read Through and Write Through patterns.',
+    url: 'https://fizanfaisal.vercel.app/blog/caching-strategies',
+    siteName: 'Fizan M Faisal',
+    images: [
+      {
+        url: 'https://fizanfaisal.vercel.app/og?title=Caching Strategies',
+        width: 1200,
+        height: 630,
+        alt: 'Caching Strategies',
+      },
+    ],
+    locale: 'en_US',
+    type: 'article',
+    publishedTime: '2025-05-12',
+    authors: ['Fizan M Faisal'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Caching Strategies',
+    description:
+      'A brief overview on Different Caching Strategies including Read Through and Write Through patterns.',
+    images: ['https://fizanfaisal.vercel.app/og?title=Caching Strategies'],
+  },
 }
 
 <BlogHeaderCard
-  author={metadata.author}
-  date={metadata.date}
+  author="Fizan"
+  date="May 12, 2025"
   imageSrc={'/images/profile.jpg'}
   imageAlt={'Fizan'}
-  title={metadata.title}
+  title="Caching Strategies"
 />
 
 I wanted to start writing blog for a long time let this be the first one. I have been looking into Microservice architecture for a while and i thought it would be nice to write while learning it.
