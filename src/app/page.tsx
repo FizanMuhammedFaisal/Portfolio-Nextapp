@@ -2,7 +2,7 @@
 // #0D5F4B
 'use client'
 import { useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'motion/react'
 import Transition from '@/components/layout/Transition'
 import WebGLBackground from '@/components/shader/WebglBackground'
 import useLenis from '@/hooks/useLenis'

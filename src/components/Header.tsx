@@ -6,7 +6,7 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
-} from 'framer-motion'
+} from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRef, useState } from 'react'
