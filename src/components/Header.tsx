@@ -1,6 +1,5 @@
 'use client'
 
-import { useHeader } from '@/context/HeaderContext'
 import clsx from 'clsx'
 import {
   AnimatePresence,
@@ -10,7 +9,7 @@ import {
 } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 const TOP_SCROLL_LIMIT =
   typeof window !== 'undefined' ? window.innerHeight * 0.9 : 200
@@ -25,7 +24,7 @@ type NavLink = {
 const links: NavLink[] = [
   { href: '/', label: 'Home', icon: 'Home' },
   { href: '/about', label: 'About', icon: 'User' },
-  // { href: '/projects', label: 'Projects', icon: 'Code2' },
+  { href: '/projects', label: 'Projects', icon: 'Code2' },
   { href: '/learnings', label: 'Learn', icon: 'Code2' },
   { href: '/blog', label: 'Blogs', icon: 'Book' },
 ]
@@ -39,7 +38,6 @@ function Header() {
   const lastScrollPosition = useRef(0)
   const lastTimestamp = useRef(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const { headerColor } = useHeader()
   useMotionValueEvent(scrollY, 'change', (currentScrollY) => {
     const currentTime = Date.now()
     const Distance = Math.abs(currentScrollY - lastScrollPosition.current)
@@ -115,7 +113,7 @@ function Header() {
                     <motion.span
                       className={`relative z-10 font-medium ${
                         isSelected
-                          ? `${headerColor} font-semibold  `
+                          ? 'text-emerald-500 font-semibold'
                           : 'text-amber-50'
                       }`}
                     >

@@ -1,4 +1,4 @@
-import { Github, Mail, ArrowUpRight } from 'lucide-react'
+import { Github, Mail, ArrowUpRight, FileDown } from 'lucide-react'
 import Image from 'next/image'
 import WebGLBackground from '@/components/shader/WebglBackground'
 import Transition from '@/components/layout/Transition'
@@ -25,6 +25,11 @@ function Page() {
       href: 'mailto:fizanmuhammedfaisal.k@gmail.com',
       label: 'Email',
       icon: Mail,
+    },
+    {
+      href: '/resume.pdf',
+      label: 'Resume',
+      icon: FileDown,
     },
   ]
 
