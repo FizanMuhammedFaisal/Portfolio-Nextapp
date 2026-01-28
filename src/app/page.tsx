@@ -77,9 +77,12 @@ export default function Home() {
           <div className="flex flex-col min-h-screen justify-center items-center p-4 text-white">
             <motion.div
               className="mb-8 sm:mb-12 relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
+              initial={{ opacity: 0, filter: 'blur(20px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{
+                duration: 1.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               style={{ y }}
             >
               <motion.div
@@ -98,11 +101,13 @@ export default function Home() {
                       initial={{
                         backgroundImage:
                           'linear-gradient(to bottom right, #ffffff, #8ea0b8, #ffffff)',
+                        fontWeight: 700,
                       }}
                       animate={{
                         backgroundImage: isHovered
                           ? 'linear-gradient(to bottom right, #8ea0b8, #F1F5FA, #8ea0b8)'
                           : 'linear-gradient(to bottom right, #ffffff, #8ea0b8, #ffffff)',
+                        fontWeight: [700, 700, 900, 700], // Breathe: normal -> bold -> normal
                       }}
                       transition={{
                         backgroundImage: {
@@ -111,6 +116,12 @@ export default function Home() {
                           repeatDelay: 0.5,
                           delay: index * 0.3,
                           repeatType: 'reverse',
+                        },
+                        fontWeight: {
+                          duration: 1.2,
+                          delay: 2.5, // Start after all entrance animations
+                          times: [0, 0.3, 0.6, 1], // Control keyframe timing
+                          ease: 'easeInOut',
                         },
                       }}
                       className={`inline-block text-5xl sm:text-6xl md:text-8xl lg:text-[6rem] xl:text-[6rem] font-bold font-bebas mr-2 sm:mr-4 bg-clip-text text-transparent`}
@@ -126,28 +137,53 @@ export default function Home() {
             </motion.div>
             <motion.div
               className="flex flex-col items-center gap-6 mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
             >
-              <h2 className="text-sm sm:text-xl font-light tracking-[0.4em] text-white/70 uppercase">
+              <motion.h2
+                className="text-sm sm:text-xl font-light tracking-[0.4em] text-white/70 uppercase"
+                initial={{ opacity: 0, y: 20, letterSpacing: '0.6em' }}
+                animate={{ opacity: 1, y: 0, letterSpacing: '0.4em' }}
+                transition={{
+                  duration: 1,
+                  delay: 1.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
                 Software Engineer
-              </h2>
+              </motion.h2>
 
-              <Link
-                href="/blog"
-                className="group relative px-6 py-2 bg-white/5 backdrop-blur-sm border border-white/10 text-white/90 text-xs font-medium tracking-[0.2em] rounded-full hover:bg-white/10 hover:border-white/30 transition-all duration-300 flex items-center gap-3"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.7,
+                  ease: [0.34, 1.56, 0.64, 1],
+                }}
               >
-                <span className="relative z-10">READ MY THOUGHTS</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </Link>
+                <Link
+                  href="/blog"
+                  className="group relative px-6 py-2 bg-white/5 backdrop-blur-sm border border-white/10 text-white/90 text-xs font-medium tracking-[0.2em] rounded-full hover:bg-white/10 hover:border-white/30 transition-all duration-300 flex items-center gap-3"
+                >
+                  <span className="relative z-10">READ MY THOUGHTS</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
 
-              <Link
-                href="/about"
-                className="text-white/50 hover:text-white/80 text-xs tracking-wider transition-colors"
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 2 }}
               >
-                About
-              </Link>
+                <Link
+                  href="/about"
+                  className="text-white/50 hover:text-white/80 text-xs tracking-wider transition-colors"
+                >
+                  About
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
         </WebGLBackground>

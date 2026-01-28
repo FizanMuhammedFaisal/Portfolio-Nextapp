@@ -44,15 +44,36 @@ function Page() {
         <div className="relative min-h-screen flex items-center justify-center">
           <div className="w-full max-w-3xl mx-auto px-6 py-20">
             <MotionDiv
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 40, filter: 'blur(20px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="space-y-10"
             >
               {/* Profile Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-6">
-                  <div className="relative group">
+                <MotionDiv
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.3,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="flex items-center gap-6"
+                >
+                  <MotionDiv
+                    className="relative group"
+                    initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.5,
+                      ease: [0.34, 1.56, 0.64, 1],
+                    }}
+                  >
                     <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/30 to-transparent rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <Image
                       src="/profile.png"
@@ -61,29 +82,67 @@ function Page() {
                       height={100}
                       className="relative rounded-2xl object-cover ring-1 ring-white/10"
                     />
-                  </div>
+                  </MotionDiv>
                   <div>
-                    <h1 className="text-4xl font-light text-white tracking-tight">
-                      Fizan M Faisal
-                    </h1>
-                    <p className="text-emerald-400/70 text-sm font-mono tracking-wide mt-2">
-                      Software Engineer
-                    </p>
+                    <MotionDiv
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.6,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      <h1 className="text-4xl font-light text-white tracking-tight">
+                        Fizan M Faisal
+                      </h1>
+                    </MotionDiv>
+                    <MotionDiv
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.8,
+                        ease: 'easeOut',
+                      }}
+                    >
+                      <p className="text-emerald-400/70 text-sm font-mono tracking-wide mt-2">
+                        Software Engineer
+                      </p>
+                    </MotionDiv>
                   </div>
-                </div>
+                </MotionDiv>
 
-                <div className="max-w-xl">
+                <MotionDiv
+                  className="max-w-xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
                   <p className="text-xl text-gray-300 leading-relaxed font-light">
                     I build software and enjoy understanding how things work.{' '}
                     <span className="text-white">
                       Clean architecture and thoughtful design.
                     </span>
                   </p>
-                </div>
+                </MotionDiv>
               </div>
 
               {/* Focus Areas */}
-              <div className="border-t border-white/10 pt-6">
+              <MotionDiv
+                className="border-t border-white/10 pt-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
                 <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-4 font-medium">
                   Focus Areas
                 </p>
@@ -92,24 +151,41 @@ function Page() {
                     'Full-Stack Development',
                     'System Design',
                     'Performance Engineering',
-                  ].map((area) => (
-                    <span
+                  ].map((area, index) => (
+                    <MotionDiv
                       key={area}
-                      className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 1.2 + index * 0.1,
+                        ease: [0.34, 1.56, 0.64, 1],
+                      }}
                     >
-                      {area}
-                    </span>
+                      <span className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200">
+                        {area}
+                      </span>
+                    </MotionDiv>
                   ))}
                 </div>
-              </div>
+              </MotionDiv>
 
               {/* Connect - New Compact Design */}
-              <div className="border-t border-white/10 pt-6">
+              <MotionDiv
+                className="border-t border-white/10 pt-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
                 <h2 className="text-base text-white tracking-wide mb-4 font-medium">
                   Let's Connect
                 </h2>
                 <div className="flex flex-wrap gap-6">
-                  {links.map((link) => {
+                  {links.map((link, index) => {
                     const isMailto = link.href.startsWith('mailto')
 
                     return (
@@ -119,8 +195,13 @@ function Page() {
                         target={isMailto ? undefined : '_blank'}
                         rel={isMailto ? undefined : 'noopener noreferrer'}
                         className="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.6,
+                          delay: 1.7 + index * 0.1,
+                          ease: 'easeOut',
+                        }}
                       >
                         <link.icon
                           size={18}
@@ -135,7 +216,7 @@ function Page() {
                     )
                   })}
                 </div>
-              </div>
+              </MotionDiv>
             </MotionDiv>
           </div>
         </div>
