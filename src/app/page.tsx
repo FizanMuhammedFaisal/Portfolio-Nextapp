@@ -46,21 +46,19 @@ export default function Home() {
     hovered: {
       fontWeight: 950,
       transition: {
-        type: 'spring', // Use a spring animation
+        type: 'spring' as const, // Use a spring animation
         stiffness: 70, // Lower stiffness for a softer, slower, more "gooey" feel
         damping: 10, // Standard damping for a nice subtle bounce
         mass: 1, // Default mass (can adjust to make it feel heavier/lighter)
-        ease: 'easeOut', // Easing still applies to how the spring settles
       },
     },
     unhovered: {
       fontWeight: 700, // Return to normal boldness
       transition: {
-        type: 'spring', // Use a spring animation for the return
+        type: 'spring' as const, // Use a spring animation for the return
         stiffness: 250, // Higher stiffness for a quicker snap back
         damping: 25, // Higher damping to make it settle faster with less bounce
         mass: 1,
-        ease: 'easeOut',
       },
     },
   }
