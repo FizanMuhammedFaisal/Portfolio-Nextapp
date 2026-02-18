@@ -116,7 +116,7 @@ export default function Home() {
                           repeatType: 'reverse',
                         },
                         fontWeight: {
-                          duration: 1.2,
+                          duration: 3,
                           delay: 2.5, // Start after all entrance animations
                           times: [0, 0.3, 0.6, 1], // Control keyframe timing
                           ease: 'easeInOut',
