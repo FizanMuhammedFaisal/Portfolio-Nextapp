@@ -27,7 +27,7 @@ function Page() {
       icon: Mail,
     },
     {
-      href: '/resume.pdf',
+      href: '/FizanMFaisal.pdf',
       label: 'Resume',
       icon: FileDown,
     },
